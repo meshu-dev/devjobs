@@ -1,10 +1,33 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { setGlobal } from 'reactn';
+
 import './index.css';
-import App from './App';
+
+import Layout from './components/Layout/Layout.js';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import APIUtils from './common/APIUtils';
+import AuthService from './common/AuthService';
+
+let apiUtils = new APIUtils(
+	'http://api.devjobs.docker'
+);
+
+setGlobal({
+	apiUtils: apiUtils,
+  authService: new AuthService(apiUtils)
+});
+
+ReactDOM.render(
+	<Router>
+		<Layout />
+	</Router>,
+	document.getElementById('root')
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
