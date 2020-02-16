@@ -14,11 +14,11 @@ import APIUtils from './common/APIUtils';
 import AuthService from './common/AuthService';
 
 let apiUtils = new APIUtils(
-	'http://api.devjobs.docker'
+  process.env.REACT_APP_API_URL
 );
 
 setGlobal({
-	apiUtils: apiUtils,
+  apiUtils: apiUtils,
   authService: new AuthService(apiUtils)
 });
 

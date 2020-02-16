@@ -6,8 +6,7 @@ const express    = require('express'),
 // Load config params to process.env
 require('dotenv').config();
 
-const port = process.env.APP_PORT || 3000,
-	  apiUrl = process.env.APP_API_SITE;
+const port = process.env.APP_PORT || 3000;
 
 app.use(express.static(path.join(__dirname, 'build')));
 
