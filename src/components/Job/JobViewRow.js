@@ -19,7 +19,10 @@ class JobViewRow extends Component {
 	      <Col xs lg="10">
           {
             this.isValidUrl(this.props.value) ? (
-              <a href={ this.props.value }>{ this.props.value }</a>
+              <a
+                href={ this.props.value }
+                target="_blank"
+                rel="noopener noreferrer">{ this.props.value }</a>
             ) : (
               this.props.value
             )

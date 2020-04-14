@@ -2,6 +2,7 @@ import React, { Component } from 'reactn';
 import './JobView.css';
 
 import JobViewRow from './JobViewRow';
+import JobViewHtmlRow from './JobViewHtmlRow';
 import Loader from './../Loader/Loader';
 
 import Container from 'react-bootstrap/Container';
@@ -56,16 +57,26 @@ class JobView extends Component {
       let date = this.getDate(job.date.$date.$numberLong);
 
       return (
-        <div id="job-view">
-          <h1>{ job.jobTitle }</h1>
-          <Button href="/">Back</Button>
-          <Container>
-            <JobViewRow label="Date Posted:" value={ date } />
-            <JobViewRow label="Employer:" value={ job.employerName } />
-            <JobViewRow label="Location:" value={ job.locationName } />
-            <JobViewRow label="Job Link:" value={ job.jobUrl } />
-            <JobViewRow label="Description:" value={ job.jobDescription } />
-          </Container>
+        <div>
+          <Row id="job-view-header">
+            <Col>
+              <h1>{ job.jobTitle }</h1>
+            </Col>
+            <Col>
+              <Button href="/">Back</Button>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <div id="job-view">
+                <JobViewRow label="Date Posted:" value={ date } />
+                <JobViewRow label="Employer:" value={ job.employerName } />
+                <JobViewRow label="Location:" value={ job.locationName } />
+                <JobViewRow label="Job Link:" value={ job.jobUrl } />
+                <JobViewHtmlRow label="Description:" value={ job.jobDescription } />
+              </div>
+            </Col>
+          </Row>
         </div>
       );
     } else {

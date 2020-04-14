@@ -5,3 +5,15 @@
 .job-view-row {
 	margin: 10px 0;
 }
+
+#job-view-header {
+	margin: 20px 0;
+}
+
+#job-view-header h1 {
+	margin: 0;
+}
+
+#job-view-header div:last-child {
+	text-align: right;
+}

@@ -1,10 +1,12 @@
 import React, { Component } from 'reactn';
 import { NavLink, Link, withRouter } from 'react-router-dom';
-import { Container, Navbar, Nav } from 'react-bootstrap';
+import { Container, Row, Col, Navbar, Nav } from 'react-bootstrap';
 
 import { useGlobal } from 'reactn';
 
-import logo from './../../logo.svg';
+//import logo from './../../programmer-logo.png';
+
+import './Header.css';
 
 class Header extends Component {
   constructor(props) {
@@ -43,17 +45,23 @@ class Header extends Component {
       <header>
         <Navbar bg="dark" variant="dark">
           <Container>
-            <Navbar.Brand href="/">
-              <img
-                src={ logo }
-                width="30"
-                height="30"
-                className="d-inline-block align-top"
-                alt="React Bootstrap logo"
-              />{' '}
-              DevJobs!!!
-            </Navbar.Brand>
-            { this.renderLinks() }
+            <Row>
+              <Col>
+                <Navbar.Brand href="/">
+                  <img
+                    src="/code-logo.png"
+                    width="30"
+                    height="30"
+                    className="d-inline-block align-top"
+                    alt="React Bootstrap logo"
+                  />{' '}
+                  DevJobs
+                </Navbar.Brand>
+              </Col>
+              <Col>
+                { this.renderLinks() }
+              </Col>
+            </Row>
           </Container>
         </Navbar>
       </header>

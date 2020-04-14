@@ -11,6 +11,8 @@ import Login from './../Auth/Login';
 
 import PrivateRoute from './../../common/PrivateRoute';
 
+import { Container } from 'react-bootstrap';
+
 class Layout extends Component {
   render() {
     let userData = this.global.authService.getUserData(),
@@ -21,14 +23,14 @@ class Layout extends Component {
         <div class="row no-gutters h-100">
           <div class="col-sm h-100">
             <Header />
-            <div class="container h-100">
+            <Container>
               <Route path='/login' component={ Login } />
               <PrivateRoute exact path='/' component={ JobList } loggedIn={ isLoggedIn } />
               <PrivateRoute path='/jobs/:page' component={ JobList } loggedIn={ isLoggedIn } />
               <PrivateRoute path='/job/:id' component={ JobView } loggedIn={ isLoggedIn } />
               <PrivateRoute path="/test" component={ JobTest } loggedIn={ isLoggedIn } />
               <Route exact path="/jobs" render={ () => (<Redirect to="/" />) } /> 
-            </div>
+            </Container>
           </div>
         </div>
       </div>

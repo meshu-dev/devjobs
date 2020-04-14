@@ -21,7 +21,7 @@ class JobList extends Component {
 
     const { page } = this.props.match.params;
 
-    this.pageLimit = 2;
+    this.pageLimit = 10;
     this.pageNum = page ? page : 1;
   }
 
@@ -31,7 +31,7 @@ class JobList extends Component {
     let offset = (this.pageNum - 1) * this.pageLimit;
 
     let result = await this.global.apiUtils.get(
-      `/jobs?limit=${this.pageLimit}&offset=${offset}`,
+      `/jobs?limit=${this.pageLimit}&offset=${offset}&order[date]=desc`,
       true
     );
 
@@ -75,9 +75,7 @@ class JobList extends Component {
     return (
       <div id="job-view">
         <h1>Job Vacancies</h1>
-        <Container>
-          { content }
-        </Container>
+        { content }
       </div>
     );
   }
