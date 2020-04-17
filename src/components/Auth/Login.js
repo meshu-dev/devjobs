@@ -1,10 +1,6 @@
 import React, { Component } from 'reactn';
 import { withRouter } from 'react-router-dom';
-
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+import { Row, Col, Form, Button } from 'react-bootstrap';
 
 class Login extends Component {
   constructor(props) {

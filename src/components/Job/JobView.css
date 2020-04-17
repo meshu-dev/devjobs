@@ -15,5 +15,11 @@
 }
 
 #job-view-header div:last-child {
-	text-align: right;
+	display: flex;
+	justify-content: flex-end;
+}
+
+#job-view-header div:last-child .btn {
+	margin-left: 10px;
+	height: 36px;
 }

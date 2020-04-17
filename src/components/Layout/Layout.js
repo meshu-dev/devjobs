@@ -5,6 +5,8 @@ import { Route, Redirect } from 'react-router-dom';
 
 import Header from './../Header/Header.js';
 import JobList from './../Job/JobList';
+import JobFavouriteList from './../Job/JobFavouriteList';
+import JobSearch from './../Job/JobSearch';
 import JobView from './../Job/JobView';
 import JobTest from './../Job/JobTest';
 import Login from './../Auth/Login';
@@ -19,17 +21,52 @@ class Layout extends Component {
         isLoggedIn = userData ? true : false;
 
     return (
-      <div class="container-fluid px-0">
-        <div class="row no-gutters h-100">
-          <div class="col-sm h-100">
+      <div className="container-fluid px-0">
+        <div className="row no-gutters h-100">
+          <div className="col-sm h-100">
             <Header />
             <Container>
-              <Route path='/login' component={ Login } />
-              <PrivateRoute exact path='/' component={ JobList } loggedIn={ isLoggedIn } />
-              <PrivateRoute path='/jobs/:page' component={ JobList } loggedIn={ isLoggedIn } />
-              <PrivateRoute path='/job/:id' component={ JobView } loggedIn={ isLoggedIn } />
-              <PrivateRoute path="/test" component={ JobTest } loggedIn={ isLoggedIn } />
-              <Route exact path="/jobs" render={ () => (<Redirect to="/" />) } /> 
+              <Route
+                path='/login'
+                component={ Login }
+              />
+              <PrivateRoute
+                exact path='/'
+                component={ JobList }
+                loggedIn={ isLoggedIn }
+              />
+              <PrivateRoute
+                path='/jobs/:page'
+                component={ JobList }
+                loggedIn={ isLoggedIn }
+              />
+              <PrivateRoute
+                path='/job-searches'
+                component={ JobSearch }
+                loggedIn={ isLoggedIn }
+              />
+              <PrivateRoute
+                path='/favourites/:page'
+                component={ JobFavouriteList }
+                loggedIn={ isLoggedIn }
+              />
+              <PrivateRoute
+                path='/job/:id'
+                component={ JobView }
+                loggedIn={ isLoggedIn }
+              />
+              <PrivateRoute
+                path="/test"
+                component={ JobTest }
+                loggedIn={ isLoggedIn }
+              />
+              <Route
+                exact
+                path="/jobs"
+                render={
+                  () => (<Redirect to="/" />)
+                }
+              /> 
             </Container>
           </div>
         </div>

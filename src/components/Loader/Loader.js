@@ -5,7 +5,7 @@ import './Loader.css';
 class Loader extends Component {
   render() {
     return (
-  		<div class="d-flex justify-content-center">
+  		<div className="d-flex justify-content-center">
 			<Spinner animation="border" role="status">
 			  <span className="sr-only">Loading...</span>
 			</Spinner>

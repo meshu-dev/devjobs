@@ -1,13 +1,16 @@
 import React, { Component } from 'reactn';
-import { Container, Row, Col } from 'react-bootstrap';
+
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 import JobListRow from './JobListRow';
 import Loader from './../Loader/Loader';
 import Paginator from './../Paginator/Paginator';
 
-class JobList extends Component {
+class JobFavouriteList extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       error: null,
@@ -28,7 +31,7 @@ class JobList extends Component {
     let offset = (this.pageNum - 1) * this.pageLimit;
 
     let result = await this.global.apiUtils.get(
-      `/jobs?isFavourited=false&limit=${this.pageLimit}&offset=${offset}&order[date]=desc`,
+      `/jobs?isFavourited=true&limit=${this.pageLimit}&offset=${offset}&order[date]=desc`,
       true
     );
 
@@ -63,7 +66,7 @@ class JobList extends Component {
     if (isLoaded) {
       content = this.getJobRows(jobs);
 
-      let totalPages = Math.ceil(totalJobs / this.pageLimit)
+      let totalPages = totalJobs / this.pageLimit;
 
       content.push(
         <Paginator
@@ -79,11 +82,11 @@ class JobList extends Component {
 
     return (
       <div id="job-view">
-        <h1>Job Vacancies</h1>
+        <h1>Favourited Vacancies</h1>
         { content }
       </div>
     );
   }
 }
 
-export default JobList;
+export default JobFavouriteList;

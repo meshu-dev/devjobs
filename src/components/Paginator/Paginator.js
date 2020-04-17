@@ -20,13 +20,22 @@ class Paginator extends Component {
     let active = this.props.active ? parseInt(this.props.active) : 1;
     let pages = this.getPageLinks(this.props.total, active);
 
+    let childKey = pages.length;
+
     if (pages.length > 0) {
-      if (active > 1) pages.unshift(<Pagination.Prev href={ `${this.props.url}/${active - 1}` } />);
-      if (active < this.props.total) pages.push(<Pagination.Next href={ `${this.props.url}/${active + 1}` } />);
+      if (active > 1) {
+        childKey++;
+        pages.unshift(<Pagination.Prev key={ childKey } href={ `${this.props.url}/${active - 1}` } />);
+      }
+      if (active < this.props.total) {
+        childKey++;
+        pages.push(<Pagination.Next key={ childKey } href={ `${this.props.url}/${active + 1}` } />);
+      }
     }
+    childKey++;
 
     return (
-      <Pagination>{ pages }</Pagination>
+      <Pagination key={ childKey }>{ pages }</Pagination>
     );
   }
 }

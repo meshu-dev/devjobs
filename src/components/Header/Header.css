@@ -3,7 +3,19 @@ header .row {
 }
 
 header .navbar-nav {
+	display: flex;
+	align-content: center;
 	justify-content: flex-end;
+	height: 100%;
+}
+
+header .nav-item {
+	align-self: center;
+	margin: 0 10px;
+}
+
+header .nav-item a {
+	color: #FFF;
 }
 
 header img {

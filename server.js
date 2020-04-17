@@ -4,7 +4,13 @@ const express    = require('express'),
 	  bodyParser = require('body-parser');
 
 // Load config params to process.env
-require('dotenv').config();
+let envFilename = '.env'
+
+if (process.env.NODE_ENV !== 'production') {
+  envFilename = `.env.${process.env.NODE_ENV}`
+}
+
+require('dotenv').config({ path: envFilename });
 
 const port = process.env.APP_PORT || 3000;
 

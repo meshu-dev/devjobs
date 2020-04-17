@@ -21,6 +21,17 @@ class APIUtils {
     return this.request(url, 'POST', fetchData);
   }
 
+  async put(url, params = {}) {
+    let fetchData = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(params)
+    };
+    return this.request(url, 'PUT', fetchData);
+  }
+
   async request(
     url,
     method = 'GET',

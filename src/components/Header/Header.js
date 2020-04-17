@@ -28,12 +28,18 @@ class Header extends Component {
 
     if (userData) {
       return (
-        <Nav className="mr-auto">
+        <Nav>
           <Nav.Item>
-            <NavLink to="/" className="nav-link">Home</NavLink>
+            <NavLink to="/">Home</NavLink>
           </Nav.Item>
           <Nav.Item>
-            <NavLink to="#" onClick={ this.logout } className="nav-link">Logout</NavLink>
+            <NavLink to="/favourites/1">Favourites</NavLink>
+          </Nav.Item>
+          <Nav.Item>
+            <NavLink to="/job-searches">Job Searches</NavLink>
+          </Nav.Item>
+          <Nav.Item>
+            <NavLink to="#" onClick={ this.logout }>Logout</NavLink>
           </Nav.Item>
         </Nav>
       );

@@ -1,26 +1,24 @@
 import React, { Component } from 'reactn';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 import './JobView.css';
 
 import JobViewRow from './JobViewRow';
 import JobViewHtmlRow from './JobViewHtmlRow';
 import Loader from './../Loader/Loader';
 
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
-
 import { useGlobal } from 'reactn';
+
+import APIUtils from './../../common/APIUtils';
 
 class JobView extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       error: null,
       isLoaded: false,
       job: null
-    };
+    }
   }
 
   async componentDidMount() {
@@ -32,19 +30,35 @@ class JobView extends Component {
 
     this.setState({
       isLoaded: true,
-      job: result
+      job: result,
+      api: this.global.apiUtils
     });
   }
 
   getDate(timestamp) {
-    let t = parseInt(timestamp);
-    let d = new Date(t);
+    timestamp = parseInt(timestamp)
+    const date = new Date(timestamp)
 
-    console.log(d);
+    return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`
+  }
 
-    let timeStampCon = d.getDate() + '/' + (d.getMonth()) + '/' + d.getFullYear();
+  async setFavouriteStatus() {
+    const isFavourited = this.state.job.isFavourited ? false : true;
+    const result = await this.global.apiUtils.put(
+      `/jobs/${this.state.job.id}`,
+      {
+        isFavourited: isFavourited
+      }
+    )
 
-    return timeStampCon;
+    if (result) {
+      this.state.job.isFavourited = isFavourited
+
+      this.setState({
+        job: this.state.job
+      })
+    }
+    console.log('result', result);
   }
 
   render() {
@@ -52,9 +66,19 @@ class JobView extends Component {
 
     if (isLoaded) {
       if (error) {
-        return <div>Error: { error.message }</div>;
+        return <div>Error: { error.message }</div>
       }
       let date = this.getDate(job.date.$date.$numberLong);
+
+      let favouriteBtnText = 'Favourite'
+
+      if (job.isFavourited === true) {
+        favouriteBtnText = 'Unfavourite'
+      }
+      const favouriteBtn = <Button
+        onClick={ this.setFavouriteStatus }>
+          { favouriteBtnText }
+        </Button>
 
       return (
         <div>
@@ -64,6 +88,9 @@ class JobView extends Component {
             </Col>
             <Col>
               <Button href="/">Back</Button>
+              <Button onClick={ this.setFavouriteStatus.bind(this) }>
+                  { favouriteBtnText }
+              </Button>
             </Col>
           </Row>
           <Row>
@@ -78,9 +105,9 @@ class JobView extends Component {
             </Col>
           </Row>
         </div>
-      );
+      )
     } else {
-      return <Loader />;
+      return <Loader />
     }
   }
 }
