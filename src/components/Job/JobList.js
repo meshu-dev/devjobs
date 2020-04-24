@@ -63,16 +63,22 @@ class JobList extends Component {
     if (isLoaded) {
       content = this.getJobRows(jobs);
 
-      let totalPages = Math.ceil(totalJobs / this.pageLimit)
+      if (content.length > 0) {
+        let totalPages = Math.ceil(totalJobs / this.pageLimit)
 
-      content.push(
-        <Paginator
-          key={ jobs.length + 1 }
-          total={totalPages}
-          active={this.pageNum}
-          url="/jobs"
-        />
-      );
+        if (totalPages > 1) {
+          content.push(
+            <Paginator
+              key={ jobs.length + 1 }
+              total={totalPages}
+              active={this.pageNum}
+              url="/jobs"
+            />
+          );
+        }
+      } else {
+        content.push(<div>No jobs added</div>);
+      }
     } else {
       content.push(<Loader key="0" />);
     }
