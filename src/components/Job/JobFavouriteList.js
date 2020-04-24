@@ -78,9 +78,9 @@ class JobFavouriteList extends Component {
               url="/favourites"
             />
           );
-        } else {
-          content.push(<div>No favourites added</div>);
         }
+      } else {
+        content.push(<div>No favourites added</div>);
       }
     } else {
       content.push(<Loader key="0" />);
