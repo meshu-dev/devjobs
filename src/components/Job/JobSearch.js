@@ -2,11 +2,10 @@ import React, { Component } from 'reactn';
 import { Row, Col, Button, Form } from 'react-bootstrap';
 import './JobView.css';
 
-import JobViewRow from './JobViewRow';
-import JobViewHtmlRow from './JobViewHtmlRow';
 import Loader from './../Loader/Loader';
 
-import { useGlobal } from 'reactn';
+// TODO - is useGlobal required?
+//import { useGlobal } from 'reactn';
 
 class JobSearch extends Component {
   constructor(props) {
@@ -64,17 +63,12 @@ class JobSearch extends Component {
   }
 
   render() {
-    const { error, isLoaded, job } = this.state;
+    const { error, isLoaded } = this.state;
 
     if (isLoaded) {
       if (error) {
         return <div>Error: { error.message }</div>
       }
-      const jobSearches = JSON.stringify(
-        this.state.jobSite.searchParams,
-        null,
-        4
-      )
 
       return (
         <div>

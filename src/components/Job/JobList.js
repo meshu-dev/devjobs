@@ -1,5 +1,4 @@
 import React, { Component } from 'reactn';
-import { Container, Row, Col } from 'react-bootstrap';
 
 import JobListRow from './JobListRow';
 import Loader from './../Loader/Loader';
@@ -23,7 +22,8 @@ class JobList extends Component {
   }
 
   async componentDidMount() {
-    const { pageNum } = this.props.match.params;
+    // TODO - Should pageNum be used?
+    //const { pageNum } = this.props.match.params;
 
     let offset = (this.pageNum - 1) * this.pageLimit;
 
@@ -56,7 +56,7 @@ class JobList extends Component {
   }
 
   render() {
-    const { error, isLoaded, jobs, totalJobs } = this.state;
+    const { isLoaded, jobs, totalJobs } = this.state;
 
     let content = [];
 

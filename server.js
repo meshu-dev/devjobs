@@ -1,7 +1,6 @@
 const express    = require('express'),
 	  app        = express(),
-	  path       = require('path'),
-	  bodyParser = require('body-parser');
+	  path       = require('path');
 
 // Load config params to process.env
 let envFilename = '.env'

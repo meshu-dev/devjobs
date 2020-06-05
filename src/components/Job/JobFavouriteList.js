@@ -1,9 +1,5 @@
 import React, { Component } from 'reactn';
 
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-
 import JobListRow from './JobListRow';
 import Loader from './../Loader/Loader';
 import Paginator from './../Paginator/Paginator';
@@ -26,7 +22,8 @@ class JobFavouriteList extends Component {
   }
 
   async componentDidMount() {
-    const { pageNum } = this.props.match.params;
+    // TODO - Should pageNum be used?
+    //const { pageNum } = this.props.match.params;
 
     let offset = (this.pageNum - 1) * this.pageLimit;
 
@@ -59,7 +56,9 @@ class JobFavouriteList extends Component {
   }
 
   render() {
-    const { error, isLoaded, jobs, totalJobs } = this.state;
+    // TODO - Not sure if error will 
+    //const { error, isLoaded, jobs, totalJobs } = this.state;
+    const { isLoaded, jobs, totalJobs } = this.state;
 
     let content = [];
 

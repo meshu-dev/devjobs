@@ -1,14 +1,13 @@
 import React, { Component } from 'reactn';
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import { Row, Col, Button } from 'react-bootstrap';
 import './JobView.css';
 
 import JobViewRow from './JobViewRow';
 import JobViewHtmlRow from './JobViewHtmlRow';
 import Loader from './../Loader/Loader';
 
-import { useGlobal } from 'reactn';
-
-import APIUtils from './../../common/APIUtils';
+// TODO - is useGlobal required?
+//import { useGlobal } from 'reactn';
 
 class JobView extends Component {
   constructor(props) {
@@ -75,10 +74,6 @@ class JobView extends Component {
       if (job.isFavourited === true) {
         favouriteBtnText = 'Unfavourite'
       }
-      const favouriteBtn = <Button
-        onClick={ this.setFavouriteStatus }>
-          { favouriteBtnText }
-        </Button>
 
       return (
         <div>

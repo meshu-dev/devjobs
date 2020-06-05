@@ -1,8 +1,9 @@
 import React, { Component } from 'reactn';
-import { NavLink, Link, withRouter } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import { Container, Row, Col, Navbar, Nav } from 'react-bootstrap';
 
-import { useGlobal } from 'reactn';
+// TODO - is useGlobal required?
+//import { useGlobal } from 'reactn';
 
 //import logo from './../../programmer-logo.png';
 

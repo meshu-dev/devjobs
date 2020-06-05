@@ -8,7 +8,7 @@ class Paginator extends Component {
 
     for (let number = 1; number <= total; number++) {
       items.push(
-        <Pagination.Item key={number} href={ `${this.props.url}/${number}` } active={number == active}>
+        <Pagination.Item key={number} href={ `${this.props.url}/${number}` } active={number === active}>
           {number}
         </Pagination.Item>,
       );
