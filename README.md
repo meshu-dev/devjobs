@@ -29,7 +29,6 @@ cp .env.example .env
     - REACT_APP_API_URL set to the Dev Jobs API
 ```
 REACT_APP_API_URL=http://localhost:8000
-APP_PORT=3000
 ```
 ## Commands
 - Run app in development
