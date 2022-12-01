@@ -50,8 +50,6 @@ class APIUtils {
         fetchData['headers']['Authorization'] = `Bearer ${authToken}`;
       }
 
-      console.log('Request', this.apiUrl + url, fetchData);
-
       const response = await fetch(
         this.apiUrl + url,
         fetchData
