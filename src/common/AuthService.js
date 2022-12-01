@@ -29,6 +29,15 @@ class AuthService {
     return currentUser ? JSON.parse(currentUser) : null;
   }
 
+  getAuthToken() {
+    let userData = this.getUserData();
+
+    if (userData) {
+      return userData.token;
+    }
+    return null;
+  }
+
   getAuthHeader() {
     let userData = this.getUserData();
 

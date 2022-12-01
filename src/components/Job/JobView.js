@@ -34,11 +34,9 @@ class JobView extends Component {
     });
   }
 
-  getDate(timestamp) {
-    timestamp = parseInt(timestamp)
-    const date = new Date(timestamp)
-
-    return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`
+  getDate(date) {
+    date = new Date(date);
+    return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
   }
 
   async setFavouriteStatus() {
@@ -62,12 +60,13 @@ class JobView extends Component {
 
   render() {
     const { error, isLoaded, job } = this.state;
-
+    
     if (isLoaded) {
       if (error) {
         return <div>Error: { error.message }</div>
       }
-      let date = this.getDate(job.date.$date.$numberLong);
+      const jobParams = job.params;
+      let date = this.getDate(job.date);
 
       let favouriteBtnText = 'Favourite'
 
@@ -79,7 +78,7 @@ class JobView extends Component {
         <div>
           <Row id="job-view-header">
             <Col>
-              <h1>{ job.jobTitle }</h1>
+              <h1>{ jobParams.jobTitle }</h1>
             </Col>
             <Col>
               <Button href="/">Back</Button>
@@ -92,10 +91,10 @@ class JobView extends Component {
             <Col>
               <div id="job-view">
                 <JobViewRow label="Date Posted:" value={ date } />
-                <JobViewRow label="Employer:" value={ job.employerName } />
-                <JobViewRow label="Location:" value={ job.locationName } />
-                <JobViewRow label="Job Link:" value={ job.jobUrl } />
-                <JobViewHtmlRow label="Description:" value={ job.jobDescription } />
+                <JobViewRow label="Employer:" value={ jobParams.employerName } />
+                <JobViewRow label="Location:" value={ jobParams.locationName } />
+                <JobViewRow label="Job Link:" value={ jobParams.jobUrl } />
+                <JobViewHtmlRow label="Description:" value={ jobParams.jobDescription } />
               </div>
             </Col>
           </Row>

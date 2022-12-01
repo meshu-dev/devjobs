@@ -39,6 +39,19 @@ class APIUtils {
     getHeaders = false
   ) {
     try {
+      const authToken = this.getAuthToken();
+
+      if (authToken) {
+        if (!fetchData['headers']) {
+          fetchData = {
+            headers: {}
+          };
+        }
+        fetchData['headers']['Authorization'] = `Bearer ${authToken}`;
+      }
+
+      console.log('Request', this.apiUrl + url, fetchData);
+
       const response = await fetch(
         this.apiUrl + url,
         fetchData
@@ -70,6 +83,20 @@ class APIUtils {
       headers[header[0]] = header[1];
     }
     return headers;
+  }
+
+  getUserData() {
+    let currentUser = localStorage.getItem('currentUser');
+    return currentUser ? JSON.parse(currentUser) : null;
+  }
+
+  getAuthToken() {
+    let userData = this.getUserData();
+
+    if (userData) {
+      return userData.token;
+    }
+    return null;
   }
 }
 

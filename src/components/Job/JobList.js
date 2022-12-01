@@ -28,7 +28,7 @@ class JobList extends Component {
     let offset = (this.pageNum - 1) * this.pageLimit;
 
     let result = await this.global.apiUtils.get(
-      `/jobs?isFavourited=false&limit=${this.pageLimit}&offset=${offset}&order[date]=desc`,
+      `/jobs?isFavourited=false&limit=${this.pageLimit}&skip=${offset}&sort=desc`,
       true
     );
 

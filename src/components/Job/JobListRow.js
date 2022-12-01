@@ -31,13 +31,12 @@ class JobListRow extends Component {
   }
 
   getDate(job) {
-    const timestamp = parseInt(job.date.$date.$numberLong)
-    const dateObj = new Date(timestamp)
-    const month = this.getMonth(timestamp)
-    const day = dateObj.getDate()
-    const dayText = day + this.getDaySuffix(day)
+    const dateObj = new Date(job.date);
+    const month = this.getMonth(dateObj.getTime());
+    const day = dateObj.getDate();
+    const dayText = day + this.getDaySuffix(day);
 
-    return `${dayText} ${month} ${dateObj.getFullYear()}`
+    return `${dayText} ${month} ${dateObj.getFullYear()}`;
   }
 
   getMonth(timestamp) {
@@ -55,10 +54,11 @@ class JobListRow extends Component {
 
   render() {
     if (this.props.job) {
-      const job = this.props.job
-      const dateText = this.getDate(job)
-      const minimumSalary = this.formatSalary(job.minimumSalary)
-      const maximumSalary = this.formatSalary(job.maximumSalary)
+      const job = this.props.job;
+      const jobParams = job.params;
+      const dateText = this.getDate(job);
+      const minimumSalary = this.formatSalary(jobParams.minimumSalary);
+      const maximumSalary = this.formatSalary(jobParams.maximumSalary);
 
       return (
         <Link to={ `/job/${job.id}` } className="job-list-row">
@@ -68,7 +68,7 @@ class JobListRow extends Component {
               <Container>
                 <Row>
                   <Col>
-                    <Card.Title>{ job.jobTitle }</Card.Title>
+                    <Card.Title>{ jobParams.jobTitle }</Card.Title>
                   </Col>
                   <Col>
                     <span className="font-weight-bold">Date posted:&nbsp;</span>
@@ -79,7 +79,7 @@ class JobListRow extends Component {
                   <Col>
                     <Card.Text>
                       <span className="font-weight-bold">Location:&nbsp;</span>
-                      { job.locationName }
+                      { jobParams.locationName }
                     </Card.Text>
                     <Card.Text>
                       <span>Salary:&nbsp;</span>
