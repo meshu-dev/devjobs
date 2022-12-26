@@ -59,6 +59,11 @@ class JobListRow extends Component {
       const dateText = this.getDate(job);
       const minimumSalary = this.formatSalary(jobParams.minimumSalary);
       const maximumSalary = this.formatSalary(jobParams.maximumSalary);
+      let salaryText = 'Unavailable';
+
+      if (jobParams.minimumSalary && jobParams.maximumSalary) {
+        salaryText = `${minimumSalary} to ${maximumSalary}`;
+      }
 
       return (
         <Link to={ `/job/${job.id}` } className="job-list-row">
@@ -83,7 +88,7 @@ class JobListRow extends Component {
                     </Card.Text>
                     <Card.Text>
                       <span>Salary:&nbsp;</span>
-                      { `${minimumSalary} to ${maximumSalary}` }
+                      { salaryText }
                     </Card.Text>
                   </Col>
                 </Row>

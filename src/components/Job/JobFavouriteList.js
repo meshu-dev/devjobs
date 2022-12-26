@@ -49,7 +49,6 @@ class JobFavouriteList extends Component {
     let rows = [];
 
     for (let key in jobs) {
-      console.log('job KEY', key);
       rows.push(<JobListRow key={ key } job={ jobs[key] } />);
     }
     return rows;

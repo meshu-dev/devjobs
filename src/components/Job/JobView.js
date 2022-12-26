@@ -1,4 +1,5 @@
 import React, { Component } from 'reactn';
+import { Link } from 'react-router-dom';
 import { Row, Col, Button } from 'react-bootstrap';
 import './JobView.css';
 
@@ -81,7 +82,9 @@ class JobView extends Component {
               <h1>{ jobParams.jobTitle }</h1>
             </Col>
             <Col>
-              <Button href="/">Back</Button>
+              <Link to="/">
+                <Button>Back</Button>
+              </Link>
               <Button onClick={ this.setFavouriteStatus.bind(this) }>
                   { favouriteBtnText }
               </Button>

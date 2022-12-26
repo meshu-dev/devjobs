@@ -1,0 +1,20 @@
+#job-search-header {
+  margin: 20px 0;
+}
+
+#job-search-header h1 {
+  margin: 0;
+}
+
+#job-search-header div:last-child {
+  display: flex;
+  justify-content: flex-end;
+}
+
+#job-search-header .btn {
+  height: 36px;
+}
+
+#job-search-header .col {
+  padding: 0;
+}

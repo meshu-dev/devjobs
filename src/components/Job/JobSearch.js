@@ -1,6 +1,6 @@
 import React, { Component } from 'reactn';
 import { Row, Col, Button, Form } from 'react-bootstrap';
-import './JobView.css';
+import './JobSearch.css';
 
 import Loader from './../Loader/Loader';
 
@@ -72,7 +72,7 @@ class JobSearch extends Component {
 
       return (
         <div>
-          <Row id="job-view-header">
+          <Row id="job-search-header">
             <Col>
               <h1>{ this.state.jobSite.name }</h1>
             </Col>
