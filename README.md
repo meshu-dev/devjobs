@@ -3,6 +3,7 @@
 An app used to display, favourite jobs and update job searches, this app manages data with the use of the Dev Jobs API. 
 
 ## Install software
+
 ### NodeJS
 - Install in ubuntu
 ```
@@ -14,10 +15,13 @@ sudo apt-get install -y nodejs
 brew install node
 ```
 ### Dev Jobs API
+
 Go to https://github.com/meshu-dev/devjobs-api then follow install and setup instructions
 
 ## Setup 
+
 - Install npm packages
+
 ```
 npm install
 ```
@@ -31,7 +35,9 @@ cp .env.example .env
 REACT_APP_API_URL=http://localhost:8000
 ```
 ## Commands
+
 - Run app in development
+
 ```
 npm run start
 ```
