@@ -5,12 +5,15 @@ An app used to display, favourite jobs and update job searches, this app manages
 ## Install software
 
 ### NodeJS
+
 - Install in ubuntu
+
 ```
 curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -
 sudo apt-get install -y nodejs
 ```
 - Install in MacOS via brew 
+
 ```
 brew install node
 ```
@@ -26,14 +29,17 @@ Go to https://github.com/meshu-dev/devjobs-api then follow install and setup ins
 npm install
 ```
 - Copy the .env.example file to a new file named .env
+
 ```
 cp .env.example .env
 ```
 - Fill in .env variables in new file
-    - REACT_APP_API_URL set to the Dev Jobs API
+- REACT_APP_API_URL set to the Dev Jobs API
+
 ```
 REACT_APP_API_URL=http://localhost:8000
 ```
+
 ## Commands
 
 - Run app in development
