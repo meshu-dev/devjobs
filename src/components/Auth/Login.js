@@ -46,7 +46,7 @@ class Login extends Component {
             onSubmit={ this.login }
             style={{ padding: '1rem', width: '18rem' }}>
             <Form.Row className="text-center">
-              Login (Master)
+              Login
             </Form.Row>
             <Form.Group controlId="formBasicEmail">
               <Form.Control
