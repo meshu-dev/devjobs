@@ -65,6 +65,8 @@ class JobList extends Component {
       if (content.length > 0) {
         let totalPages = Math.ceil(totalJobs / this.pageLimit)
 
+        console.log(`totalJobs: ${totalJobs} | pageLimit: ${this.pageLimit} | totalPages: ${totalPages}`);
+
         if (totalPages > 1) {
           content.push(
             <Paginator
