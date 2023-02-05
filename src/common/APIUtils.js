@@ -77,7 +77,7 @@ class APIUtils {
   getHeaders(response) {
     let headers = {};
 
-    console.log('RES response', response);
+    console.log('RES response', response.headers);
 
     for (let header of response.headers) {
       headers[header[0]] = header[1];
