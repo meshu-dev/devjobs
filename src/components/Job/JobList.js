@@ -34,8 +34,10 @@ class JobList extends Component {
 
     let total = -1;
 
-    if (result.headers['x-total-count']) {
-      total = result.headers['x-total-count'];
+    console.log('Result Headers', result.headers);
+
+    if (result.headers['X-Total-Count']) {
+      total = result.headers['X-Total-Count'];
     }
 
     this.setState({
