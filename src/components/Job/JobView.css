@@ -1,5 +1,6 @@
 #job-view {
 	font-size: 1.25rem;
+	padding-bottom: 20px;
 }
 
 .job-view-row {
@@ -22,4 +23,8 @@
 #job-view-header div:last-child .btn {
 	margin-left: 10px;
 	height: 36px;
+}
+
+.pagination {
+	flex-wrap: wrap;
 }
