@@ -32,13 +32,14 @@ class JobList extends Component {
       true
     );
 
+    /*
     let total = -1;
 
     console.log('Result Headers', result.headers);
 
     if (result.headers['X-Total-Count']) {
       total = result.headers['X-Total-Count'];
-    }
+    } */
 
     this.setState({
       isLoaded: true,
