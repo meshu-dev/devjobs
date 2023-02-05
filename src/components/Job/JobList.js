@@ -42,8 +42,8 @@ class JobList extends Component {
 
     this.setState({
       isLoaded: true,
-      jobs: result.data,
-      totalJobs: total
+      jobs: result.data.data,
+      totalJobs: result.data.total
     });
   }
 
