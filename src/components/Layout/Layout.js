@@ -13,8 +13,6 @@ import Login from './../Auth/Login';
 
 import PrivateRoute from './../../common/PrivateRoute';
 
-import { Container } from 'react-bootstrap';
-
 class Layout extends Component {
   render() {
     let userData = this.global.authService.getUserData(),

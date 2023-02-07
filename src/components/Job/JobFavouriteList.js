@@ -32,12 +32,6 @@ class JobFavouriteList extends Component {
       true
     );
 
-    let total = -1;
-
-    if (result.headers['x-total-count']) {
-      total = result.headers['x-total-count'];
-    }
-
     this.setState({
       isLoaded: true,
       jobs: result.data.data,

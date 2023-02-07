@@ -1,6 +1,6 @@
 import React, { Component } from 'reactn';
 import { NavLink, withRouter } from 'react-router-dom';
-import { Container, Row, Col, Navbar, Nav } from 'react-bootstrap';
+import { Row, Col, Navbar, Nav } from 'react-bootstrap';
 
 // TODO - is useGlobal required?
 //import { useGlobal } from 'reactn';

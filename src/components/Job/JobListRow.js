@@ -72,7 +72,7 @@ class JobListRow extends Component {
               <div className="job-list-mobileview">
                 <div className="job-list-title">{ jobParams.jobTitle }</div>
                 <div className="job-list-mobileview-content">
-                  <img src={ job.thumb } />
+                  <img src={ job.thumb } alt={ job.id } />
                   <div className="job-list-mobileview-text">
                     <div>
                       <span className="font-weight-bold">Date posted:&nbsp;</span>
