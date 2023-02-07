@@ -56,7 +56,6 @@ class JobView extends Component {
         job: this.state.job
       })
     }
-    console.log('result', result);
   }
 
   render() {
@@ -96,8 +95,8 @@ class JobView extends Component {
                 <JobViewRow label="Date Posted:" value={ date } />
                 <JobViewRow label="Employer:" value={ jobParams.employerName } />
                 <JobViewRow label="Location:" value={ jobParams.locationName } />
-                <JobViewRow label="Job Link:" value={ jobParams.jobUrl } />
-                <JobViewHtmlRow label="Description:" value={ jobParams.jobDescription } />
+                <JobViewRow label="Job Link:" value={ jobParams.jobUrl } className="job-view-link" />
+                <JobViewHtmlRow label="Description:" value={ jobParams.jobDescription } className="job-view-description" />
               </div>
             </Col>
           </Row>

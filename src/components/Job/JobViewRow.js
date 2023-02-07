@@ -14,8 +14,8 @@ class JobViewRow extends Component {
 
   render() {
     return (
-	    <Row className="job-view-row">
-	      <Col xs lg="2" className="font-weight-bold">{ this.props.label }</Col>
+	    <Row className={ this.props.className ? `job-view-row ${this.props.className}` : 'job-view-row' }>
+	      <Col xs lg="2" className="job-view-label font-weight-bold">{ this.props.label }</Col>
 	      <Col xs lg="10">
           {
             this.isValidUrl(this.props.value) ? (

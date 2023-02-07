@@ -15,8 +15,6 @@ a.job-list-row:hover {
 
 .job-list-content {
 	display: flex;
-	flex-direction: row;
-	padding: 20px;
 }
 
 a.job-list-row img {
@@ -36,4 +34,43 @@ a.job-list-row p.card-text {
 
 a.job-list-row p.card-text span {
 	font-weight: bold;
+}
+
+.job-list-desktopview {
+  display: flex;
+  flex-direction: row;
+  padding: 20px;
+}
+
+.job-list-mobileview {
+  display: none;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.job-list-mobileview .job-list-title {
+  margin-bottom: 10px;
+}
+
+a.job-list-row .job-list-mobileview img {
+  width: 150px;
+}
+
+.job-list-mobileview-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.job-list-mobileview-text {
+  padding-left: 20px;
+}
+
+@media screen and (max-width: 700px) {
+  .job-list-desktopview {
+    display: none;
+  }
+
+  .job-list-mobileview {
+    display: flex;
+  }
 }

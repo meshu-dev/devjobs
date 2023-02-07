@@ -6,7 +6,7 @@ import Paginator from './../Paginator/Paginator';
 
 class JobFavouriteList extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       error: null,
@@ -40,8 +40,8 @@ class JobFavouriteList extends Component {
 
     this.setState({
       isLoaded: true,
-      jobs: result.data,
-      totalJobs: total
+      jobs: result.data.data,
+      totalJobs: result.data.total
     });
   }
 
@@ -78,7 +78,7 @@ class JobFavouriteList extends Component {
           );
         }
       } else {
-        content.push(<div>No favourites added</div>);
+        content.push(<div key="0">No favourites added</div>);
       }
     } else {
       content.push(<Loader key="0" />);

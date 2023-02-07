@@ -25,41 +25,34 @@ class Layout extends Component {
         <div className="row no-gutters h-100">
           <div className="col-sm h-100">
             <Header />
-            <Container>
+            <div id="main">
               <Route
                 path='/login'
-                component={ Login }
-              />
+                component={ Login } />
               <PrivateRoute
                 exact path='/'
                 component={ JobList }
-                loggedIn={ isLoggedIn }
-              />
+                loggedIn={ isLoggedIn } />
               <PrivateRoute
                 path='/jobs/:page'
                 component={ JobList }
-                loggedIn={ isLoggedIn }
-              />
+                loggedIn={ isLoggedIn } />
               <PrivateRoute
-                path='/job-searches'
+                path='/settings'
                 component={ JobSearch }
-                loggedIn={ isLoggedIn }
-              />
+                loggedIn={ isLoggedIn } />
               <PrivateRoute
                 path='/favourites/:page'
                 component={ JobFavouriteList }
-                loggedIn={ isLoggedIn }
-              />
+                loggedIn={ isLoggedIn } />
               <PrivateRoute
                 path='/job/:id'
                 component={ JobView }
-                loggedIn={ isLoggedIn }
-              />
+                loggedIn={ isLoggedIn } />
               <PrivateRoute
                 path="/test"
                 component={ JobTest }
-                loggedIn={ isLoggedIn }
-              />
+                loggedIn={ isLoggedIn } />
               <Route
                 exact
                 path="/jobs"
@@ -67,7 +60,7 @@ class Layout extends Component {
                   () => (<Redirect to="/" />)
                 }
               /> 
-            </Container>
+            </div>
           </div>
         </div>
       </div>

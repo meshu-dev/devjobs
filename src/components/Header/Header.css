@@ -21,3 +21,21 @@ header .nav-item a {
 header img {
 	margin-right: 10px;
 }
+
+#nav {
+	max-width: 1150px;
+	width: 1150px;
+	margin: 0 auto;
+}
+
+#nav .row {
+	flex-direction: row;
+	flex-wrap: nowrap;
+}
+
+@media screen and (max-width: 500px) {
+	header .nav-item {
+    align-self: center;
+    margin: 0 5px;
+	}
+}

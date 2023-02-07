@@ -37,7 +37,7 @@ class Header extends Component {
             <NavLink to="/favourites/1">Favourites</NavLink>
           </Nav.Item>
           <Nav.Item>
-            <NavLink to="/job-searches">Job Searches</NavLink>
+            <NavLink to="/settings">Settings</NavLink>
           </Nav.Item>
           <Nav.Item>
             <NavLink to="#" onClick={ this.logout }>Logout</NavLink>
@@ -51,7 +51,7 @@ class Header extends Component {
     return (
       <header>
         <Navbar bg="dark" variant="dark">
-          <Container>
+          <div id="nav">
             <Row>
               <Col>
                 <Navbar.Brand href="/">
@@ -69,7 +69,7 @@ class Header extends Component {
                 { this.renderLinks() }
               </Col>
             </Row>
-          </Container>
+          </div>
         </Navbar>
       </header>
     );

@@ -32,15 +32,6 @@ class JobList extends Component {
       true
     );
 
-    /*
-    let total = -1;
-
-    console.log('Result Headers', result.headers);
-
-    if (result.headers['X-Total-Count']) {
-      total = result.headers['X-Total-Count'];
-    } */
-
     this.setState({
       isLoaded: true,
       jobs: result.data.data,
@@ -66,9 +57,7 @@ class JobList extends Component {
       content = this.getJobRows(jobs);
 
       if (content.length > 0) {
-        let totalPages = Math.ceil(totalJobs / this.pageLimit)
-
-        console.log(`totalJobs: ${totalJobs} | pageLimit: ${this.pageLimit} | totalPages: ${totalPages}`);
+        let totalPages = Math.ceil(totalJobs / this.pageLimit);
 
         if (totalPages > 1) {
           content.push(

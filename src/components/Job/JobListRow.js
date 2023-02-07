@@ -57,49 +57,72 @@ class JobListRow extends Component {
       const job = this.props.job;
       const jobParams = job.params;
       const dateText = this.getDate(job);
-      const minimumSalary = this.formatSalary(jobParams.minimumSalary);
-      const maximumSalary = this.formatSalary(jobParams.maximumSalary);
+      const minimumSalary = jobParams ? this.formatSalary(jobParams.minimumSalary) : 0;
+      const maximumSalary = jobParams ? this.formatSalary(jobParams.maximumSalary) : 0;
       let salaryText = 'Unavailable';
 
-      if (jobParams.minimumSalary && jobParams.maximumSalary) {
+      if (jobParams && jobParams.minimumSalary && jobParams.maximumSalary) {
         salaryText = `${minimumSalary} to ${maximumSalary}`;
       }
 
-      return (
-        <Link to={ `/job/${job.id}` } className="job-list-row">
-          <Card bg="light" className="job-list-content">
-            <Card.Img src={ job.thumb } className="rounded" />
-            <Card.Body>
-              <Container>
-                <Row>
-                  <Col>
-                    <Card.Title>{ jobParams.jobTitle }</Card.Title>
-                  </Col>
-                  <Col>
-                    <span className="font-weight-bold">Date posted:&nbsp;</span>
-                    { dateText }
-                  </Col>
-                </Row>
-                <Row>
-                  <Col>
-                    <Card.Text>
+      if (jobParams) {
+        return (
+          <Link to={ `/job/${job.id}` } className="job-list-row">
+            <Card bg="light" className="job-list-content">
+              <div className="job-list-mobileview">
+                <div className="job-list-title">{ jobParams.jobTitle }</div>
+                <div className="job-list-mobileview-content">
+                  <img src={ job.thumb } />
+                  <div className="job-list-mobileview-text">
+                    <div>
+                      <span className="font-weight-bold">Date posted:&nbsp;</span>
+                      { dateText }
+                    </div>
+                    <div>
                       <span className="font-weight-bold">Location:&nbsp;</span>
                       { jobParams.locationName }
-                    </Card.Text>
-                    <Card.Text>
-                      <span>Salary:&nbsp;</span>
+                    </div>
+                    <div>
+                      <span className="font-weight-bold">Salary:&nbsp;</span>
                       { salaryText }
-                    </Card.Text>
-                  </Col>
-                </Row>
-              </Container>
-            </Card.Body>
-          </Card>
-        </Link>
-      );
-    } else {
-      return <div></div>;
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="job-list-desktopview">
+                <Card.Img src={ job.thumb } className="rounded" />
+                <Card.Body>
+                  <Container>
+                    <Row>
+                      <Col>
+                        <Card.Title>{ jobParams.jobTitle }</Card.Title>
+                      </Col>
+                      <Col>
+                        <span className="font-weight-bold">Date posted:&nbsp;</span>
+                        { dateText }
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col>
+                        <Card.Text>
+                          <span className="font-weight-bold">Location:&nbsp;</span>
+                          { jobParams.locationName }
+                        </Card.Text>
+                        <Card.Text>
+                          <span>Salary:&nbsp;</span>
+                          { salaryText }
+                        </Card.Text>
+                      </Col>
+                    </Row>
+                  </Container>
+                </Card.Body>
+              </div>
+            </Card>
+          </Link>
+        );
+      }
     }
+    return (null);
   }
 }
 

@@ -28,3 +28,15 @@
 .pagination {
 	flex-wrap: wrap;
 }
+
+.job-view-link .job-view-label,
+.job-view-description .job-view-label {
+  display: flex;
+}
+
+@media screen and (max-width: 995px) {
+  .job-view-link .job-view-label,
+  .job-view-description .job-view-label {
+    display: none;
+  }
+}

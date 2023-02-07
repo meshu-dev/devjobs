@@ -8,7 +8,8 @@ class Login extends Component {
     
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      isLoggedIn: null
     };
 
     this.login = this.login.bind(this);
@@ -32,12 +33,21 @@ class Login extends Component {
       password
     );
 
+    this.setState({
+      isLoggedIn: isLoggedIn
+    });
+
     if (isLoggedIn === true) {
-      this.props.history.push('/');
+      // TODO - Not working anymore
+      //this.props.history.push('/');
+    
+      window.location = '/';
     }
   }
 
   render() {
+    let loginMsg = this.state.isLoggedIn === false ? <div style={{ color: 'red' }}>Email/password was incorrect. Please try again.</div> : '';
+
     return (
       <Row className="justify-content-center">
         <Col>
@@ -45,7 +55,8 @@ class Login extends Component {
             className="border rounded mx-auto"
             onSubmit={ this.login }
             style={{ padding: '1rem', width: '18rem' }}>
-            <Form.Row className="text-center">
+            { loginMsg }
+            <Form.Row className="text-center" style={{ display: 'block', marginBottom: '10px' }}>
               Login
             </Form.Row>
             <Form.Group controlId="formBasicEmail">
