@@ -7,7 +7,7 @@ class APIUtils {
     url,
     incHeaders = false
   ) {
-    return this.request(url, 'GET', {}, incHeaders);
+    return this.request(url, {}, incHeaders);
   }
 
   async post(url, params = {}) {
@@ -18,7 +18,7 @@ class APIUtils {
       },
       body: JSON.stringify(params)
     };
-    return this.request(url, 'POST', fetchData);
+    return this.request(url, fetchData);
   }
 
   async put(url, params = {}) {
@@ -29,12 +29,11 @@ class APIUtils {
       },
       body: JSON.stringify(params)
     };
-    return this.request(url, 'PUT', fetchData);
+    return this.request(url, fetchData);
   }
 
   async request(
     url,
-    method = 'GET',
     fetchData = {},
     getHeaders = false
   ) {
@@ -56,6 +55,7 @@ class APIUtils {
       );
 
       if (!response.ok) {
+        console.log('APIUtils.request | Response', response);
         throw Error(response.statusText);
       }
 
@@ -70,7 +70,7 @@ class APIUtils {
         return json;
       }
     } catch (error) {
-      console.log(error);
+      console.log('APIUtils.request | Error', error);
     }
   }
 
