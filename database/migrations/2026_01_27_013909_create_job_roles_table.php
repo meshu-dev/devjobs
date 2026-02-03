@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('location');
             $table->integer('min_salary');
             $table->integer('max_salary');
+            $table->string('url');
             $table->json('params');
             $table->date('posted_at');
             $table->timestamps();

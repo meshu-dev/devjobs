@@ -16,6 +16,7 @@ class Job extends Model
         'location',
         'min_salary',
         'max_salary',
+        'url',
         'params',
         'posted_at',
     ];

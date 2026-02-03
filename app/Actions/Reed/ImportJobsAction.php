@@ -39,6 +39,7 @@ class ImportJobsAction
             'location'    => $job['locationName'],
             'min_salary'  => (int) $job['minimumSalary'],
             'max_salary'  => (int) $job['maximumSalary'],
+            'url'         => $job['jobUrl'],
             'params'      => ['applicationCount' => $job['applicationCount']],
             'posted_at'   => Carbon::createFromFormat('d/m/Y', $job['datePosted']),
         ];

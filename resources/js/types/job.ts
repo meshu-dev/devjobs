@@ -4,6 +4,8 @@ export type Job = {
         description: string,
         employer: string,
         location: string,
+        min_salary: string,
+        max_salary: string,
         posted_at: string
     }
 }

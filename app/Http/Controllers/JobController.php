@@ -15,9 +15,6 @@ class JobController extends Controller
     public function index(): Response
     {
         $jobs = resolve(GetJobsAction::class)->execute();
-
-    //dd(JobListResource::collection($jobs));
-
         return Inertia::render('Home', ['jobs' => JobListResource::collection($jobs)]);
     }
 

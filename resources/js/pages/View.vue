@@ -8,26 +8,33 @@ const { job } = defineProps<{ job: Job }>()
 <template>
   <div v-if="job">
     <h1 class="text-3xl mb-4">{{ job.data.title }}</h1>
-    <div class="flex mb-4">
+    <div class="flex mb-2">
       <div class="flex-1">
         <div class="flex mb-4">
-          <span class="w-32 font-extrabold">Recruiter:</span>
+          <span class="w-24 font-extrabold">Recruiter:</span>
           <span>{{ job.data.employer }}</span>
         </div>
         <div class="flex">
-          <span class="w-32 font-extrabold">Location:</span>
+          <span class="w-24 font-extrabold">Location:</span>
           <span>{{ job.data.location }}</span>
         </div>
       </div>
       <div class="flex-1">
         <div class="flex mb-4">
-          <span class="w-32 font-extrabold">Posted At:</span>
+          <span class="w-24 font-extrabold">Posted At:</span>
           <span>{{ job.data.posted_at }}</span>
+        </div>
+        <div class="flex mb-4">
+          <span class="w-24 font-extrabold">Salary:</span>
+          <span>{{ job.data.min_salary }} - {{ job.data.max_salary }}</span>
         </div>
       </div>
     </div>
-    <div class="flex mb-4">
-      <Button variant="outline">View Original</Button>
+    <div class="flex mb-6 gap-2">
+      <Button variant="outline" class="cursor-pointer">Favourite</Button>
+      <a :href="job.data.posted_at" target="_blank">
+        <Button variant="outline" class="cursor-pointer">View Original</Button>
+      </a>
     </div>
     <div v-html="job.data.description"></div>
   </div>
