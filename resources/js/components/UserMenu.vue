@@ -14,7 +14,7 @@ import { Link } from '@inertiajs/vue3'
     <NavigationMenuList>
       <NavigationMenuItem>
         <NavigationMenuLink as-child :class="navigationMenuTriggerStyle()">
-          <Link href="/home">Home</Link>
+          <Link href="/">Home</Link>
         </NavigationMenuLink>
       </NavigationMenuItem>
       <NavigationMenuItem>

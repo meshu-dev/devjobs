@@ -9,7 +9,7 @@ use Inertia\{Inertia, Response};
 
 class JobController extends Controller
 {
-    public function index(): Response
+    public function list(): Response
     {
         $jobPaginate = resolve(GetJobsAction::class)->execute();
         return Inertia::render('Home', ['jobs' => $jobPaginate]);
@@ -18,5 +18,11 @@ class JobController extends Controller
     public function view(Job $job): Response
     {
         return Inertia::render('View', ['job' => new JobResource($job)]);
+    }
+
+    public function favourites(): Response
+    {
+        $jobPaginate = resolve(GetJobsAction::class)->execute();
+        return Inertia::render('Favourites', ['jobs' => $jobPaginate]);
     }
 }
