@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\Job\GetJobsAction;
+use App\Enums\FlashTypeEnum;
 use App\Http\Requests\LoginRequest;
-use App\Http\Resources\JobResource;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
-use Inertia\Response;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Request;
 
 class AuthController extends Controller
 {
@@ -19,15 +17,28 @@ class AuthController extends Controller
 
     public function login(LoginRequest $request)
     {
-        dd($request);
+        /*
+        dd($request); */
+
         if (Auth::attempt($request->all())) {
             $request->session()->regenerate();
 
-            return to_route('users.index');
+            return to_route('job.index');
         }
 
-        $jobs = resolve(GetJobsAction::class)->execute();
+        return Inertia::flash([
+            'message' => 'An error occurred logging into the user account',
+            'type'    => FlashTypeEnum::ERROR,
+        ])->back();
+    }
 
-        return Inertia::render('Home', ['jobs' => JobResource::collection($jobs)]);
+    public function logout(Request $request)
+    {
+        Auth::logout();
+    
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+    
+        return to_route('login');
     }
 }

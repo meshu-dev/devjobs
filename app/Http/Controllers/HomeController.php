@@ -11,8 +11,11 @@ class HomeController extends Controller
 {
     public function index(): Response
     {
+        /*
         $jobs = resolve(GetJobsAction::class)->execute();
 
-        return Inertia::render('Home', ['jobs' => JobResource::collection($jobs)]);
+        return Inertia::render('Home', ['jobs' => JobResource::collection($jobs)]); */
+
+        return Inertia::render('Secret');
     }
 }
