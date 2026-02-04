@@ -5,6 +5,7 @@ import { Toaster } from '@/components/ui/sonner'
 import { toast } from 'vue-sonner'
 import { router } from '@inertiajs/vue3'
 import { onUnmounted } from 'vue'
+import UserMenu from '@/components/UserMenu.vue'
 
 onUnmounted(
   router.on('flash', (event) => {
@@ -19,10 +20,10 @@ onUnmounted(
   <Head title="DevJobs">
     <meta name="description" content="Your page description">
   </Head>
+  <UserMenu />
   <main class="m-auto mt-15 mb-0 max-w-4xl">
     <slot />
   </main>
-  <Toaster
-    position="top-center"
+  <Toaster position="top-center"
   />
 </template>

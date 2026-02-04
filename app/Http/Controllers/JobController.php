@@ -3,19 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Actions\Job\GetJobsAction;
-use App\Actions\Reed\Api\GetJobAction;
-use App\Http\Resources\JobListResource;
 use App\Http\Resources\JobResource;
 use App\Models\Job;
-use Inertia\Inertia;
-use Inertia\Response;
+use Inertia\{Inertia, Response};
 
 class JobController extends Controller
 {
     public function index(): Response
     {
-        $jobs = resolve(GetJobsAction::class)->execute();
-        return Inertia::render('Home', ['jobs' => JobListResource::collection($jobs)]);
+        $jobPaginate = resolve(GetJobsAction::class)->execute();
+        return Inertia::render('Home', ['jobs' => $jobPaginate]);
     }
 
     public function view(Job $job): Response

@@ -18,7 +18,7 @@ import { Link } from '@inertiajs/vue3'
 import { toRaw } from 'vue'
 
 const j = defineProps({ jobs: Object })
-console.log('BBB', toRaw(j)) 
+console.log('BBB', toRaw(j.jobs)) 
 </script>
 
 <template>
@@ -43,9 +43,9 @@ console.log('BBB', toRaw(j))
     </Table>
   </div>
   <Pagination
-    v-if="jobs"
-    :items-per-page="jobs.meta.per_page"
-    :total="jobs.meta.total">
+    v-if="jobs && jobs.last_page > 1"
+    :items-per-page="jobs.per_page"
+    :total="jobs.total">
     <PaginationContent>
         <Link
           v-if="jobs.links.prev"
@@ -59,7 +59,7 @@ console.log('BBB', toRaw(j))
           :disabled="true"
         />
 
-        <template v-for="link in jobs.meta.links">
+        <template v-for="link in jobs.links">
           <Link v-if="link.url" :href="link.url">
             <PaginationItem
               v-if="link.page && !isNaN(link.label)"

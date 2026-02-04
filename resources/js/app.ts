@@ -3,7 +3,8 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
 import type { DefineComponent } from 'vue'
 import { createApp, h } from 'vue'
 import '../css/app.css'
-import MainLayout from './layouts/MainLayout.vue'
+import AuthLayout from './layouts/AuthLayout.vue'
+import UserLayout from './layouts/UserLayout.vue'
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel'
 
@@ -16,7 +17,7 @@ createInertiaApp({
     )
 
     page.then((module) => {
-      module.default.layout = MainLayout
+      module.default.layout = name === 'Login' ? AuthLayout : UserLayout
     })
 
     return page
