@@ -20,10 +20,12 @@ onUnmounted(
   <Head title="DevJobs">
     <meta name="description" content="Your page description">
   </Head>
-  <UserMenu />
-  <main class="m-auto mt-15 mb-0 max-w-4xl">
-    <slot />
-  </main>
+  <div class="m-auto mb-0 max-w-4xl px-8 py-12">
+    <UserMenu />
+    <main>
+      <slot />
+    </main>
+  </div>
   <Toaster position="top-center"
   />
 </template>

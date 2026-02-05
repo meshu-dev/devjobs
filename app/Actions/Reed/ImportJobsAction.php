@@ -27,7 +27,7 @@ class ImportJobsAction
         }
     }
 
-    private function createJob(int $jobId)
+    private function createJob(int $jobId): void
     {
         $job = resolve(GetJobAction::class)->execute($jobId);
 

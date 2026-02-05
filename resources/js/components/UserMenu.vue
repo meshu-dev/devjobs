@@ -10,7 +10,7 @@ import { Link } from '@inertiajs/vue3'
 </script>
 
 <template>
-  <NavigationMenu :viewport="false">
+  <NavigationMenu :viewport="false" class="my-4">
     <NavigationMenuList>
       <NavigationMenuItem>
         <NavigationMenuLink as-child :class="navigationMenuTriggerStyle()">
@@ -28,8 +28,8 @@ import { Link } from '@inertiajs/vue3'
         </NavigationMenuLink>
       </NavigationMenuItem>
       <NavigationMenuItem>
-        <NavigationMenuLink as-child :class="navigationMenuTriggerStyle()">
-          <a href="/logout">Logout</a>
+        <NavigationMenuLink as-child :class="`${navigationMenuTriggerStyle()} cursor-pointer`">
+          <Link href="/logout" method="post">Logout</Link>
         </NavigationMenuLink>
       </NavigationMenuItem>
     </NavigationMenuList>

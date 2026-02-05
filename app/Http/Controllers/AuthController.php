@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Enums\FlashTypeEnum;
 use App\Http\Requests\LoginRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
-use Illuminate\Support\Facades\Request;
 
 class AuthController extends Controller
 {
@@ -19,7 +19,6 @@ class AuthController extends Controller
     {
         if (Auth::attempt($request->all())) {
             $request->session()->regenerate();
-
             return to_route('job.index');
         }
 

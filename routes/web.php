@@ -15,4 +15,5 @@ Route::middleware('auth:web')->group(function ($router) {
     Route::get('/favourites', [JobController::class, 'favourites'])->name('job.favourites');
     Route::get('/view/{job}', [JobController::class, 'view'])->name('job.view');
     Route::get('/profile',    [UserController::class, 'profile'])->name('user.profile');
+    Route::post('/logout',    [AuthController::class, 'logout']);
 });
