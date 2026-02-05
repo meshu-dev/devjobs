@@ -2,33 +2,38 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\FlashTypeEnum;
+use App\Actions\Auth\LoginAction;
 use App\Http\Requests\LoginRequest;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Inertia\Inertia;
+use Inertia\{Inertia, Response};
 
 class AuthController extends Controller
 {
-    public function index()
+    public function index(): Response|RedirectResponse
     {
+        if (Auth::check()) {
+            return to_route('job.list');
+        }
         return Inertia::render('Login');
     }
 
-    public function login(LoginRequest $request)
+    public function userLogin(LoginRequest $request)
     {
-        if (Auth::attempt($request->all())) {
-            $request->session()->regenerate();
-            return to_route('job.index');
-        }
-
-        return Inertia::flash([
-            'message' => 'An error occurred logging into the user account',
-            'type'    => FlashTypeEnum::ERROR,
-        ])->back();
+        return resolve(LoginAction::class)->execute($request);
     }
 
-    public function logout(Request $request)
+    public function demoLogin(Request $request)
+    {
+        $request->merge([
+            'email'    => config('users.demo.email'),
+            'password' => config('users.demo.password'),
+        ]);
+        return resolve(LoginAction::class)->execute($request);
+    }
+
+    public function logout(Request $request): RedirectResponse
     {
         Auth::logout();
     

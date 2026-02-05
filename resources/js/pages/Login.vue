@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Form } from '@inertiajs/vue3'
+import { Link } from '@inertiajs/vue3'
 import { Field } from '@/components/ui/field'
 import Button from '@/components/ui/button/Button.vue'
 import Input from '@/components/ui/input/Input.vue'
@@ -29,13 +30,13 @@ import {
           type="submit">
           Login
         </Button>
-        <div class="mt-4 text-center">
-          <span>No user account?</span>
-          <Button variant="link" class="cursor-pointer">
-            Use demo account
-          </Button>
-        </div>
       </Form>
+      <div class="mt-2 text-center">
+        <span>No user account?</span>
+        <Link href="/login/demo" method="post" as="button" class="ml-1 cursor-pointer">
+          <span class="cursor-pointer">Use demo account</span>
+        </Link>
+      </div>
     </CardContent>
   </Card>
 </template>

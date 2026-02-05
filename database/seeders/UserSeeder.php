@@ -12,14 +12,14 @@ class UserSeeder extends Seeder
     {
         $users = [
             [
-                'name'     => env('USER_NAME', 'Test user'),
-                'email'    => env('USER_EMAIL', 'example@mail.com'),
-                'password' => Hash::make(env('USER_PASSWORD', 'testtest')),
+                'name'     => config('users.main.name'),
+                'email'    => config('users.main.email'),
+                'password' => Hash::make(config('users.main.password')),
             ],
             [
-                'name'     => 'Demo',
-                'email'    => 'demo@example.com',
-                'password' => Hash::make('demo'),
+                'name'     => config('users.demo.name'),
+                'email'    => config('users.demo.email'),
+                'password' => Hash::make(config('users.demo.password')),
             ]
         ];
 
