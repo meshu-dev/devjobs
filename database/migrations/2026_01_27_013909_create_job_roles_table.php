@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('min_salary');
             $table->integer('max_salary');
             $table->string('url');
-            $table->boolean('favourited');
+            $table->boolean('favourited')->default(false);
             $table->json('params');
             $table->date('posted_at');
             $table->timestamps();

@@ -1,60 +1,24 @@
 <script setup lang="ts">
-import { Button } from '@/components/ui/button'
-import {
-  Card,
-  CardAction,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
+import { Form } from '@inertiajs/vue3'
+import { Field } from '@/components/ui/field'
 import { Label } from '@/components/ui/label'
+import Input from '@/components/ui/input/Input.vue'
+import { Button } from '@/components/ui/button'
+
+const props = defineProps({ user: Object })
+console.log('props', props)
 </script>
 
 <template>
-  <Card class="w-full max-w-sm">
-    <CardHeader>
-      <CardTitle>Login to your account</CardTitle>
-      <CardDescription>
-        Enter your email below to login to your account
-      </CardDescription>
-      <CardAction>
-        <Button variant="link">
-          Sign Up
-        </Button>
-      </CardAction>
-    </CardHeader>
-    <CardContent>
-      <form>
-        <div class="grid w-full items-center gap-4">
-          <div class="flex flex-col space-y-1.5">
-            <Label for="email">Email</Label>
-            <Input id="email" type="email" placeholder="m@example.com" />
-          </div>
-          <div class="flex flex-col space-y-1.5">
-            <div class="flex items-center">
-              <Label for="password">Password</Label>
-              <a
-                href="#"
-                class="ml-auto inline-block text-sm underline"
-              >
-                Forgot your password?
-              </a>
-            </div>
-            <Input id="password" type="password" />
-          </div>
-        </div>
-      </form>
-    </CardContent>
-    <CardFooter class="flex flex-col gap-2">
-      <Button class="w-full">
-        Login
-      </Button>
-      <Button variant="outline" class="w-full">
-        Login with Google
-      </Button>
-    </CardFooter>
-  </Card>
+  <Form action="/profile" method="post" class="max-w-md">
+    <Field class="flex flex-row mb-4">
+      <Label for="name" class="flex-1">Name</Label>
+      <Input type="text" name="name" v-model="user.name" autoComplete="off" class="flex-2" />
+    </Field>
+    <Button
+      class="cursor-pointer"
+      type="submit">
+      Update
+    </Button>
+  </Form>
 </template>
