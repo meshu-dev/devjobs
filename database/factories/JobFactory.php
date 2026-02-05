@@ -20,6 +20,7 @@ class JobFactory extends Factory
             'min_salary'  => 20000,
             'max_salary'  => 40000,
             'url'         => fake()->url(),
+            'favourited'  => false,
             'params'      => [],
             'posted_at'   => now(),
         ];

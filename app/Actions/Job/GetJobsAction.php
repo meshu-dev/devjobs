@@ -7,11 +7,11 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class GetJobsAction
 {
-    public function execute(bool $ordered = true): LengthAwarePaginator
+    public function execute(bool $favourited = false): LengthAwarePaginator
     {
-        if ($ordered) {
-            return Job::orderBy('posted_at', 'desc')->paginate();
-        }
-        return Job::paginate();
+        $model = Job::orderBy('posted_at', 'desc');
+        $model = $favourited ? $model->where('favourited', true) : $model;
+
+        return $model->paginate();
     }
 }

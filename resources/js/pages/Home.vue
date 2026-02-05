@@ -5,6 +5,5 @@ defineProps({ jobs: Object })
 </script>
 
 <template>
-  <h1>Council Tax</h1>
   <JobTable :jobs="jobs" />
 </template>

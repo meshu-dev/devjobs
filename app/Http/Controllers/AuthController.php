@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Actions\Auth\LoginAction;
 use App\Http\Requests\LoginRequest;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
+use Illuminate\Http\{RedirectResponse, Request};
 use Illuminate\Support\Facades\Auth;
 use Inertia\{Inertia, Response};
 
