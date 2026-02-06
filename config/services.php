@@ -40,4 +40,8 @@ return [
         'key' => env('REED_API_KEY'),
         'min_salary' => env('REED_API_MIN_SALARY', 20000),
     ],
+
+    'larajobs' => [
+        'url' => 'https://larajobs.com/feed',
+    ]
 ];
