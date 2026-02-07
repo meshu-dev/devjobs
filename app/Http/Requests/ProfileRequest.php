@@ -21,8 +21,13 @@ class ProfileRequest extends FormRequest
      */
     public function rules(): array
     {
+        $minSalaryLimit = config('users.min_salary_limit');
+        $maxSalaryLimit = config('users.min_salary_limit');
+
         return [
-            'name' => 'required',
+            'name'       => 'required|string|min:2|max:100',
+            'min_salary' => "required|between:$minSalaryLimit,$maxSalaryLimit|lt:max_salary",
+            'max_salary' => "required|between:$minSalaryLimit,$maxSalaryLimit|gt:min_salary",
         ];
     }
 }

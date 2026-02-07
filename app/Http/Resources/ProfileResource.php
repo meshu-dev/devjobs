@@ -17,7 +17,9 @@ class ProfileResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'name' => $this->name,
+            'name'       => $this->name,
+            'min_salary' => $this->profile->min_salary,
+            'max_salary' => $this->profile->max_salary,
         ];
     }
 }

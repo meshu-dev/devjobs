@@ -15,6 +15,8 @@ console.log('props', props)
       <Label for="name" class="flex-1">Name</Label>
       <Input type="text" name="name" v-model="user.name" autoComplete="off" class="flex-2" />
     </Field>
+    {{ user.min_salary }}
+    {{ user.max_salary }}
     <Button
       class="cursor-pointer"
       type="submit">
