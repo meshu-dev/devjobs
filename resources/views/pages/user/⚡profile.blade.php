@@ -9,12 +9,31 @@ new class extends BaseComponent
 {
     #[Validate('required|string|min:2|max:100')]
     public string $name;
- 
-    #[Validate('required|numeric')]
+
     public int $minSalary;
 
-    #[Validate('required|numeric')]
     public int $maxSalary;
+
+    protected function rules()
+    {
+        $minSalaryLimit = config('users.min_salary_limit');
+        $maxSalaryLimit = config('users.max_salary_limit');
+
+        return [
+            'minSalary' => [
+                'required',
+                'numeric',
+                "between:$minSalaryLimit,$maxSalaryLimit",
+                'lt:maxSalary',
+            ],
+            'maxSalary' => [
+                'required',
+                'numeric',
+                "between:$minSalaryLimit,$maxSalaryLimit",
+                'gt:minSalary',
+            ],
+        ];
+    }
 
     public function save()
     {

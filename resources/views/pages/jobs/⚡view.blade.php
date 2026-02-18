@@ -3,6 +3,8 @@
 use App\Actions\Job\{FavouriteJobAction, GetByJobIdAction};
 use App\Models\Job;
 use App\View\Components\BaseComponent;
+use Carbon\Carbon;
+use Illuminate\Support\Number;
 
 new class extends BaseComponent
 {
@@ -38,11 +40,11 @@ new class extends BaseComponent
         <div class="flex-1">
             <div class="flex mb-4">
                 <span class="w-24 font-extrabold">Posted At:</span>
-                <span>{{ $job->posted_at }}</span>
+                <span>{{ Carbon::createFromFormat('Y-m-d', $job->posted_at)->format('d/m/Y') }}</span>
             </div>
             <div class="flex mb-4">
                 <span class="w-24 font-extrabold">Salary:</span>
-                <span>{{ $job->min_salary }} - {{ $job->max_salary }}</span>
+                <span>{{ Number::currency($job->min_salary) }} - {{ Number::currency($job->max_salary) }}</span>
             </div>
         </div>
     </div>
