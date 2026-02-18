@@ -7,7 +7,7 @@ use Livewire\Component;
 
 new class extends BaseComponent
 {
-    #[Validate('required|string')]
+    #[Validate('required|string|min:2|max:100')]
     public string $name;
  
     #[Validate('required|numeric')]

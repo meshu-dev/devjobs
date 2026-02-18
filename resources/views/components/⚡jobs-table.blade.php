@@ -15,7 +15,9 @@ new class extends BaseComponent
     #[Computed]
     public function jobs(): LengthAwarePaginator
     {
-        return resolve(GetJobsAction::class)->execute($this->type === 'favourite' ? true : false);
+        return resolve(GetJobsAction::class)->execute(
+            $this->type === 'favourite' ? true : false
+        );
     }
 
     public function mount($type): void

@@ -12,12 +12,30 @@ new #[Layout('layouts::auth')] class extends Component
     #[Validate('required|string')] 
     public string $password = '';
 
-    public function login()
+    public function userLogin()
     {
         $this->validate();
 
-        $params = ['email' => $this->email, 'password' => $this->password];
+        $params = [
+            'email' => $this->email,
+            'password' => $this->password
+        ];
 
+        return $this->login($params);
+    }
+
+    public function demoLogin()
+    {
+        $params = [
+            'email'    => config('users.demo.email'),
+            'password' => config('users.demo.password'),
+        ];
+
+        return $this->login($params);
+    }
+
+    private function login(array $params)
+    {
         if (Auth::attempt($params)) {
             session()->regenerate();
             session()->flash('status', 'You have successfully logged in');
@@ -30,11 +48,21 @@ new #[Layout('layouts::auth')] class extends Component
 ?>
 
 <div class="max-w-md mx-auto">
-    <x-form wire:submit="login">
+    <x-form wire:submit="userLogin">
         <x-input label="E-mail" wire:model="email" />
         <x-password label="Password" wire:model="password" />
         <x-slot:actions>
-            <x-button label="Login" class="btn-primary" type="submit" spinner="save" />
+            <div class="w-full flex justify-between">
+                <x-button
+                    label="Use Demo account"
+                    class="btn-ghost"
+                    wire:click="demoLogin()" />
+                <x-button
+                    label="Login"
+                    class="btn-primary"
+                    type="submit"
+                    spinner="save" />
+            </div>
         </x-slot:actions>
     </x-form>
 </div>
