@@ -32,12 +32,16 @@ new class extends BaseComponent
 ?>
 
 <div>
-    <x-table
-        :headers="$headers"
-        :rows="$this->jobs()"
-        with-pagination>
-        @scope('cell_title', $job)
-            <a href="/view/{{ $job->id }}" wire:navigate class="data-current:font-bold">{{ $job->title }}</a>
-        @endscope 
-    </x-table>
+    @if ($this->jobs()->total() > 0)
+        <x-table
+            :headers="$headers"
+            :rows="$this->jobs()"
+            with-pagination>
+            @scope('cell_title', $job)
+                <a href="/view/{{ $job->id }}" wire:navigate class="data-current:font-bold">{{ $job->title }}</a>
+            @endscope 
+        </x-table>
+    @else
+        <div>No jobs added</div>
+    @endif
 </div>
