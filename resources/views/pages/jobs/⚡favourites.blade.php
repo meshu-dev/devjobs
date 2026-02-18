@@ -1,14 +1,11 @@
 <?php
 
 use App\View\Components\BaseComponent;
-use Livewire\Component;
 
-new class extends BaseComponent
-{
-    //
-};
+new class extends BaseComponent { };
 ?>
 
 <div>
     <livewire:header title="Favourites" />
+    <livewire:jobs-table type="favourite" />
 </div>

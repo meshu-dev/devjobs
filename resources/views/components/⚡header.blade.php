@@ -4,6 +4,7 @@ use App\View\Components\BaseComponent;
 
 new class extends BaseComponent
 {
+    #[Locked]
     public string $title;
 };
 ?>
