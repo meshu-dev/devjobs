@@ -8,13 +8,13 @@ use Livewire\Component;
 new class extends BaseComponent
 {
     #[Validate('required|string')]
-    public $name;
+    public string $name;
  
     #[Validate('required|numeric')]
-    public $minSalary;
+    public int $minSalary;
 
     #[Validate('required|numeric')]
-    public $maxSalary;
+    public int $maxSalary;
 
     public function save()
     {

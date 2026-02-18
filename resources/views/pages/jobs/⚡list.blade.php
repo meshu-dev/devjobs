@@ -34,5 +34,9 @@ new class extends BaseComponent
     <x-table
         :headers="$headers"
         :rows="$this->jobs()"
-        with-pagination />
+        with-pagination>
+        @scope('cell_title', $job)
+            <a href="/view/{{ $job->id }}" wire:navigate class="data-current:font-bold">{{ $job->title }}</a>
+        @endscope 
+    </x-table>
 </div>
