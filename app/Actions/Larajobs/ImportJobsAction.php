@@ -3,6 +3,7 @@
 namespace App\Actions\Larajobs;
 
 use App\Actions\Job\GetByJobIdAction;
+use App\Enums\JobSiteEnum;
 use App\Models\Job;
 use Carbon\Carbon;
 use SimplePie\Item;
@@ -43,6 +44,7 @@ class ImportJobsAction
         }
 
         $params = [
+            'job_site_id' => JobSiteEnum::LARAJOBS->value,
             'job_id'      => $jobId,
             'title'       => $jobItem->get_title(),
             'description' => null,

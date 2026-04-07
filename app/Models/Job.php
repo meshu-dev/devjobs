@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Job extends Model
 {
@@ -13,6 +14,7 @@ class Job extends Model
     protected $table = 'job_roles';
 
     protected $fillable = [
+        'job_site_id',
         'job_id',
         'title',
         'description',
@@ -30,5 +32,13 @@ class Job extends Model
         return [
             'params' => 'array',
         ];
+    }
+
+    /**
+     * @return BelongsTo<JobSite, $this>
+     */
+    public function jobSite(): BelongsTo
+    {
+        return $this->belongsTo(JobSite::class);
     }
 }

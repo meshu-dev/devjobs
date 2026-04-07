@@ -25,6 +25,7 @@ new class extends BaseComponent
     {
         $this->headers = [
             ['key' => 'title',     'label' => 'Title'],
+            ['key' => 'jobsite',   'label' => 'Job Site'],
             ['key' => 'location',  'label' => 'Location'],
             ['key' => 'posted_at', 'label' => 'Posted At'],
         ];
@@ -42,6 +43,9 @@ new class extends BaseComponent
             with-pagination>
             @scope('cell_title', $job)
                 <a href="/view/{{ $job->id }}" wire:navigate class="data-current:font-bold">{{ $job->title }}</a>
+            @endscope
+            @scope('cell_jobsite', $job)
+                {{ $job->jobSite->name }}
             @endscope 
             @scope('cell_posted_at', $job)
                 {{ Carbon::createFromFormat('Y-m-d', $job->posted_at)->format('d/m/Y') }}

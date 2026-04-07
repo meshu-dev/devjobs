@@ -11,8 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::create('job_sites', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+        });
+
         Schema::create('job_roles', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('job_site_id');
             $table->integer('job_id');
             $table->string('title');
             $table->longText('description')->nullable();
@@ -25,6 +31,8 @@ return new class extends Migration
             $table->json('params');
             $table->date('posted_at');
             $table->timestamps();
+
+            $table->foreign('job_site_id')->references('id')->on('job_sites');
         });
     }
 
@@ -33,6 +41,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('job_sites');
         Schema::dropIfExists('job_roles');
     }
 };

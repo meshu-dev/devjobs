@@ -1,6 +1,6 @@
 <?php
 
-use App\Actions\Job\{FavouriteJobAction, GetByJobIdAction};
+use App\Actions\Job\{FavouriteJobAction, GetByJobIdAction, GetJobAction};
 use App\Models\Job;
 use App\View\Components\BaseComponent;
 use Carbon\Carbon;
@@ -19,7 +19,7 @@ new class extends BaseComponent
 
     public function mount(int $id): void
     {
-        $this->job = Job::find($id);
+        $this->job = resolve(GetJobAction::class)->execute($id);
     }
 };
 ?>

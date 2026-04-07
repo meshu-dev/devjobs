@@ -5,6 +5,7 @@ namespace App\Actions\Reed;
 use App\Actions\Job\GetByJobIdAction;
 use App\Actions\Reed\Api\GetJobAction as GetReedJobAction;
 use App\Actions\Reed\Api\SearchJobsAction;
+use App\Enums\JobSiteEnum;
 use App\Models\Job;
 use Carbon\Carbon;
 
@@ -45,6 +46,7 @@ class ImportJobsAction
         $reedJob = resolve(GetReedJobAction::class)->execute($jobId);
 
         $params = [
+            'job_site_id' => JobSiteEnum::REED->value,
             'job_id'      => $reedJob['jobId'],
             'title'       => $reedJob['jobTitle'],
             'description' => $reedJob['jobDescription'],
