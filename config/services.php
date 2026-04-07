@@ -35,4 +35,14 @@ return [
         ],
     ],
 
+    'reed' => [
+        'url'        => 'https://www.reed.co.uk/api/1.0',
+        'key'        => env('REED_API_KEY'),
+        'min_salary' => env('REED_API_MIN_SALARY', 20000),
+        'row_limit'  => env('REED_API_ROW_LIMIT', 100),
+    ],
+
+    'larajobs' => [
+        'url' => 'https://larajobs.com/feed',
+    ]
 ];

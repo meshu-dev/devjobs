@@ -28,5 +28,6 @@ class ImportJobs extends Command
     public function handle()
     {
         resolve(ReedImportJobsAction::class)->execute();
+        resolve(LarajobsImportJobsAction::class)->execute();
     }
 }

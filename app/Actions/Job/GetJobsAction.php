@@ -12,6 +12,8 @@ class GetJobsAction
         $model = Job::orderBy('posted_at', 'desc');
         $model = $favourited ? $model->where('favourited', true) : $model;
 
-        return $model->paginate(2);
+        $pageLimit = config('jobs.pagination.page_limit');
+
+        return $model->paginate($pageLimit);
     }
 }

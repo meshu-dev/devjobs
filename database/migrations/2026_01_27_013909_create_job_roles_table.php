@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('job_id');
             $table->string('title');
-            $table->longText('description');
+            $table->longText('description')->nullable();
             $table->string('employer');
             $table->string('location');
             $table->integer('min_salary');

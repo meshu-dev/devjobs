@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Actions\Reed;
+namespace App\Actions\Larajobs;
 
+use App\Actions\Job\GetByJobIdAction;
 use App\Models\Job;
 use Carbon\Carbon;
 use SimplePie\Item;
@@ -21,9 +22,16 @@ class ImportJobsAction
         }
     }
 
-    private function createJob(Item $job): void
+    private function createJob(Item $jobItem): void
     {
-        $data   = $job->data['child']['https://larajobs.com'];
+        $jobId = Uri::of($jobItem->get_id())->pathSegments()[1];
+        $job   = resolve(GetByJobIdAction::class)->execute($jobId);
+
+        if ($job) {
+            return;
+        }
+
+        $data   = $jobItem->data['child']['https://larajobs.com'];
         $salary = $data['salary'][0]['data'];
 
         if (str_contains($salary, '-')) {
@@ -35,16 +43,16 @@ class ImportJobsAction
         }
 
         $params = [
-            'job_id'      => Uri::of($job->get_id())->pathSegments()[1],
-            'title'       => $job->get_title(),
+            'job_id'      => $jobId,
+            'title'       => $jobItem->get_title(),
             'description' => null,
             'employer'    => $data['company'][0]['data'] ?? '',
             'location'    => $data['location'][0]['data'] ?? '',
-            'min_salary'  => $minSalary,
-            'max_salary'  => $maxSalary,
-            'url'         => $job->get_link(),
+            'min_salary'  => $minSalary > 0 ? (int) $minSalary : 0,
+            'max_salary'  => $maxSalary > 0 ? (int) $maxSalary : 0,
+            'url'         => $jobItem->get_link(),
             'params'      => [],
-            'posted_at'   => Carbon::parse($job->get_date()),
+            'posted_at'   => Carbon::parse($jobItem->get_date()),
         ];
 
         Job::create($params);

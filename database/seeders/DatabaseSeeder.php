@@ -3,14 +3,17 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\App;
 
 class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        $this->call([
-            UserSeeder::class,
-            JobSeeder::class,
-        ]);
+        $this->call(UserSeeder::class);
+        $this->call(JobSiteSeeder::class);
+
+        if (App::environment('local')) {
+            // $this->call(JobSeeder::class);
+        }
     }
 }

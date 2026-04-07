@@ -3,7 +3,7 @@
 namespace App\Actions\Reed;
 
 use App\Actions\Job\GetByJobIdAction;
-use App\Actions\Reed\Api\GetJobAction;
+use App\Actions\Reed\Api\GetJobAction as GetReedJobAction;
 use App\Actions\Reed\Api\SearchJobsAction;
 use App\Models\Job;
 use Carbon\Carbon;
@@ -12,36 +12,49 @@ class ImportJobsAction
 {
     public function execute(): void
     {
-        $jobsResult = resolve(SearchJobsAction::class)->execute('php developer');
-        $jobs       = $jobsResult['results'];
+        $searchTerms = [
+            'php developer',
+            'laravel developer',
+        ];
 
-        $getJobAction = resolve(GetByJobIdAction::class);
+        foreach ($searchTerms as $searchTerm) {
+            $jobs = $this->getReedJobs($searchTerm);
 
-        foreach ($jobs as $jobData) {
-            $jobId = $jobData['jobId'];
-            $job   = $getJobAction->execute($jobId);
-
-            if (!$job) {
-                $this->createJob($jobId);
+            foreach ($jobs as $jobData) {
+                $this->createJob($jobData['jobId']);
             }
         }
     }
 
+    private function getReedJobs(string $searchTerm, int $offset = 0)
+    {
+        $jobsResult = resolve(SearchJobsAction::class)->execute($searchTerm, $offset);
+        $jobs       = $jobsResult['results'];
+
+        return $jobs;
+    }
+
     private function createJob(int $jobId): void
     {
-        $job = resolve(GetJobAction::class)->execute($jobId);
+        $job = resolve(GetByJobIdAction::class)->execute($jobId);
+
+        if ($job) {
+            return;
+        }
+
+        $reedJob = resolve(GetReedJobAction::class)->execute($jobId);
 
         $params = [
-            'job_id'      => $job['jobId'],
-            'title'       => $job['jobTitle'],
-            'description' => $job['jobDescription'],
-            'employer'    => $job['employerName'],
-            'location'    => $job['locationName'],
-            'min_salary'  => (int) $job['minimumSalary'],
-            'max_salary'  => (int) $job['maximumSalary'],
-            'url'         => $job['jobUrl'],
-            'params'      => ['applicationCount' => $job['applicationCount']],
-            'posted_at'   => Carbon::createFromFormat('d/m/Y', $job['datePosted']),
+            'job_id'      => $reedJob['jobId'],
+            'title'       => $reedJob['jobTitle'],
+            'description' => $reedJob['jobDescription'],
+            'employer'    => $reedJob['employerName'],
+            'location'    => $reedJob['locationName'],
+            'min_salary'  => (int) $reedJob['minimumSalary'],
+            'max_salary'  => (int) $reedJob['maximumSalary'],
+            'url'         => $reedJob['jobUrl'],
+            'params'      => ['applicationCount' => $reedJob['applicationCount']],
+            'posted_at'   => Carbon::createFromFormat('d/m/Y', $reedJob['datePosted']),
         ];
 
         Job::create($params);
