@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\Actions\Reed\ImportJobsAction as ReedImportJobsAction;
-use App\Actions\Larajobs\ImportJobsAction as LarajobsImportJobsAction;
+use App\Actions\Job\ImportJobsAction;
+use App\Models\User;
 use Illuminate\Console\Command;
 
 class ImportJobs extends Command
@@ -27,7 +27,8 @@ class ImportJobs extends Command
      */
     public function handle()
     {
-        resolve(ReedImportJobsAction::class)->execute();
-        resolve(LarajobsImportJobsAction::class)->execute();
+        User::all()->each(
+            fn (User $user) => resolve(ImportJobsAction::class)->execute($user)    
+        );
     }
 }
