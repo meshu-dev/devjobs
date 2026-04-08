@@ -43,3 +43,15 @@
 .mary-table-pagination button {
     @apply cursor-pointer
 }
+
+.description h2 {
+    @apply font-bold mb-4;
+}
+
+.description p {
+    @apply mb-4;
+}
+
+.description ul {
+    @apply list-disc ml-8 mb-4;
+}
