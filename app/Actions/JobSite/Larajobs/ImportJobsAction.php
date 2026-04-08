@@ -1,22 +1,20 @@
 <?php
 
-namespace App\Actions\Larajobs;
+namespace App\Actions\JobSite\Larajobs;
 
 use App\Actions\Job\GetByJobIdAction;
+use App\Actions\JobSite\Larajobs\Feed\GetJobsAction;
 use App\Enums\JobSiteEnum;
-use App\Models\Job;
+use App\Models\{Job, User};
 use Carbon\Carbon;
 use SimplePie\Item;
 use Illuminate\Support\Uri;
-use willvincent\Feeds\Facades\FeedsFacade;
 
 class ImportJobsAction
 {
-    public function execute(): void
+    public function execute(User $user): void
     {
-        $url  = config('services.larajobs.url');
-        $feed = FeedsFacade::make($url);
-        $jobs = $feed->get_items();
+        $jobs = resolve(GetJobsAction::class)->execute();
 
         foreach ($jobs as $job) {
             $this->createJob($job);

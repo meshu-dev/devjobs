@@ -14,7 +14,12 @@ class UserProfile extends Model
 
     protected $fillable = [
         'user_id',
+        'search_terms',
         'min_salary',
         'max_salary',
+    ];
+
+    protected $casts = [
+        'search_terms' => 'array',
     ];
 }

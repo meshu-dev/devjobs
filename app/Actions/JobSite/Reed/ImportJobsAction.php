@@ -1,25 +1,23 @@
 <?php
 
-namespace App\Actions\Reed;
+namespace App\Actions\JobSite\Reed;
 
 use App\Actions\Job\GetByJobIdAction;
-use App\Actions\Reed\Api\GetJobAction as GetReedJobAction;
-use App\Actions\Reed\Api\SearchJobsAction;
+use App\Actions\JobSite\Reed\Api\GetJobAction as GetReedJobAction;
+use App\Actions\JobSite\Reed\Api\SearchJobsAction;
 use App\Enums\JobSiteEnum;
 use App\Models\Job;
+use App\Models\User;
 use Carbon\Carbon;
 
 class ImportJobsAction
 {
-    public function execute(): void
+    public function execute(User $user): void
     {
-        $searchTerms = [
-            'php developer',
-            'laravel developer',
-        ];
+        $minSalary = $user->profile->min_salary;
 
-        foreach ($searchTerms as $searchTerm) {
-            $jobs = $this->getReedJobs($searchTerm);
+        foreach ($user->profile->search_terms as $searchTerm) {
+            $jobs = $this->getReedJobs($searchTerm, $minSalary);
 
             foreach ($jobs as $jobData) {
                 $this->createJob($jobData['jobId']);
@@ -27,9 +25,9 @@ class ImportJobsAction
         }
     }
 
-    private function getReedJobs(string $searchTerm, int $offset = 0)
+    private function getReedJobs(string $searchTerm, int $minSalary)
     {
-        $jobsResult = resolve(SearchJobsAction::class)->execute($searchTerm, $offset);
+        $jobsResult = resolve(SearchJobsAction::class)->execute($searchTerm, $minSalary);
         $jobs       = $jobsResult['results'];
 
         return $jobs;

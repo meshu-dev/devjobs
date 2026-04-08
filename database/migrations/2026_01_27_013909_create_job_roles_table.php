@@ -14,12 +14,13 @@ return new class extends Migration
         Schema::create('job_sites', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('url');
         });
 
         Schema::create('job_roles', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('job_site_id');
-            $table->integer('job_id');
+            $table->string('job_id');
             $table->string('title');
             $table->longText('description')->nullable();
             $table->string('employer');

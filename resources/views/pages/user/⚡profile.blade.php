@@ -65,8 +65,8 @@ new class extends BaseComponent
     <livewire:header title="Profile" />
     <x-form wire:submit="save" class="max-w-md">
         <x-input label="Name" wire:model="name" />
-        <x-input label="Default money" wire:model="minSalary" prefix="GBP" money />
-        <x-input label="Default money" wire:model="maxSalary" prefix="GBP" money />
+        <x-input label="Minimum Salary" wire:model="minSalary" prefix="GBP" money />
+        <x-input label="Maximum Salary" wire:model="maxSalary" prefix="GBP" money />
         <x-slot:actions>
             <x-button label="Save" class="btn-primary" type="submit" spinner="save" />
         </x-slot:actions>

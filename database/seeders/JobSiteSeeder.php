@@ -14,10 +14,17 @@ class JobSiteSeeder extends Seeder
             [
                 'id'   => JobSiteEnum::REED->value,
                 'name' => JobSiteEnum::REED->name(),
+                'url'  => JobSiteEnum::REED->url(),
             ],
             [
                 'id'   => JobSiteEnum::LARAJOBS->value,
                 'name' => JobSiteEnum::LARAJOBS->name(),
+                'url'  => JobSiteEnum::LARAJOBS->url(),
+            ],
+            [
+                'id'   => JobSiteEnum::JOBLEADS->value,
+                'name' => JobSiteEnum::JOBLEADS->name(),
+                'url'  => JobSiteEnum::JOBLEADS->url(),
             ]
         ]);
     }

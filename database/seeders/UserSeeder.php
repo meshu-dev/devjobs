@@ -19,8 +19,9 @@ class UserSeeder extends Seeder
                     'password' => Hash::make(config('users.main.password')),
                 ],
                 'profile' => [
-                    'min_salary' => config('users.main.min_salary'),
-                    'max_salary' => config('users.main.max_salary'),
+                    'search_terms' => ['php developer', 'laravel developer'],
+                    'min_salary'   => config('users.main.min_salary'),
+                    'max_salary'   => config('users.main.max_salary'),
                 ],
             ],
             [
@@ -30,8 +31,9 @@ class UserSeeder extends Seeder
                     'password' => Hash::make(config('users.demo.password')),
                 ],
                 'profile' => [
-                    'min_salary' => config('users.demo.min_salary'),
-                    'max_salary' => config('users.demo.max_salary'),
+                    'search_terms' => ['php developer', 'laravel developer'],
+                    'min_salary'   => config('users.demo.min_salary'),
+                    'max_salary'   => config('users.demo.max_salary'),
                 ],
             ]
         ];

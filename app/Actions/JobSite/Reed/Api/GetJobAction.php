@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Reed\Api;
+namespace App\Actions\JobSite\Reed\Api;
 
 use Illuminate\Support\Facades\Http;
 

@@ -10,5 +10,6 @@ class JobSite extends Model
 
     protected $fillable = [
         'name',
+        'url',
     ];
 }
