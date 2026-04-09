@@ -48,6 +48,7 @@ new #[Layout('layouts::auth')] class extends Component
 ?>
 
 <div class="max-w-md mx-auto">
+    <div class="text-4xl font-semibold text-center mb-4">DevJobs</div>
     <x-form wire:submit="userLogin">
         <x-input label="E-mail" wire:model="email" />
         <x-password label="Password" wire:model="password" />

@@ -30,7 +30,7 @@
         <x-slot:sidebar drawer="main-drawer" collapsible class="bg-base-100 lg:bg-inherit">
 
             {{-- BRAND --}}
-            <x-app-brand class="px-5 pt-4" />
+            <div class="text-4xl font-semibold text-center mt-4">DevJobs</div>
 
             {{-- MENU --}}
             <x-menu activate-by-route>
@@ -50,12 +50,6 @@
                 <x-menu-item title="Jobs" link="/" />
                 <x-menu-item title="Favourites" link="/favourites" />
                 <x-menu-item title="Profile" link="/profile" />
-                <!-- 
-                <x-menu-item title="Hello" link="/hello" />
-                <x-menu-sub title="Settings">
-                    <x-menu-item title="Wifi" icon="o-wifi" link="####" />
-                    <x-menu-item title="Archives" icon="o-archive-box" link="####" />
-                </x-menu-sub> -->
             </x-menu>
         </x-slot:sidebar>
 
