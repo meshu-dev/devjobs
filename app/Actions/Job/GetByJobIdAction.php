@@ -6,8 +6,10 @@ use App\Models\Job;
 
 class GetByJobIdAction
 {
-    public function execute(string|int $jobId): Job|null
+    public function execute(int $userId, string|int $jobId): Job|null
     {
-        return Job::where('job_id', $jobId)->first();
+        return Job::where('user_id', $userId)
+                  ->where('job_id', $jobId)
+                  ->first();
     }
 }

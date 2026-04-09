@@ -18,19 +18,20 @@ class ImportJobsAction
         $jobs = $jobs['jobResults'];
 
         foreach ($jobs as $job) {
-            $this->createJob($job);
+            $this->createJob($user->id, $job);
         }
     }
 
-    private function createJob(array $job): void
+    private function createJob(int $userId, array $job): void
     {
-        $jobModel = resolve(GetByJobIdAction::class)->execute($job['id']);
+        $jobModel = resolve(GetByJobIdAction::class)->execute($userId, $job['id']);
 
         if ($jobModel || $job['alpha2Country'] !== 'GB') {
             return;
         }
 
         $params = [
+            'user_id'     => $userId,
             'job_site_id' => JobSiteEnum::JOBLEADS->value,
             'job_id'      => $job['id'],
             'title'       => $job['jobTitle'],

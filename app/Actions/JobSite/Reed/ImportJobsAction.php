@@ -20,7 +20,7 @@ class ImportJobsAction
             $jobs = $this->getReedJobs($searchTerm, $minSalary);
 
             foreach ($jobs as $jobData) {
-                $this->createJob($jobData['jobId']);
+                $this->createJob($user->id, $jobData['jobId']);
             }
         }
     }
@@ -33,9 +33,9 @@ class ImportJobsAction
         return $jobs;
     }
 
-    private function createJob(int $jobId): void
+    private function createJob(int $userId, int $jobId): void
     {
-        $job = resolve(GetByJobIdAction::class)->execute($jobId);
+        $job = resolve(GetByJobIdAction::class)->execute($userId, $jobId);
 
         if ($job) {
             return;
@@ -44,6 +44,7 @@ class ImportJobsAction
         $reedJob = resolve(GetReedJobAction::class)->execute($jobId);
 
         $params = [
+            'user_id'     => $userId,
             'job_site_id' => JobSiteEnum::REED->value,
             'job_id'      => $reedJob['jobId'],
             'title'       => $reedJob['jobTitle'],

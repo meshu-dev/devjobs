@@ -17,14 +17,14 @@ class ImportJobsAction
         $jobs = resolve(GetJobsAction::class)->execute();
 
         foreach ($jobs as $job) {
-            $this->createJob($job);
+            $this->createJob($user->id, $job);
         }
     }
 
-    private function createJob(Item $jobItem): void
+    private function createJob(int $userId, Item $jobItem): void
     {
         $jobId = Uri::of($jobItem->get_id())->pathSegments()[1];
-        $job   = resolve(GetByJobIdAction::class)->execute($jobId);
+        $job   = resolve(GetByJobIdAction::class)->execute($userId, $jobId);
 
         if ($job) {
             return;
@@ -42,6 +42,7 @@ class ImportJobsAction
         }
 
         $params = [
+            'user_id'     => $userId,
             'job_site_id' => JobSiteEnum::LARAJOBS->value,
             'job_id'      => $jobId,
             'title'       => $jobItem->get_title(),

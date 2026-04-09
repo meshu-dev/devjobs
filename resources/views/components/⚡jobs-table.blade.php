@@ -4,6 +4,7 @@ use App\Actions\Job\GetJobsAction;
 use App\View\Components\BaseComponent;
 use Carbon\Carbon;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Auth;
 
 new class extends BaseComponent
 {
@@ -16,7 +17,10 @@ new class extends BaseComponent
     #[Computed]
     public function jobs(): LengthAwarePaginator
     {
+        $user = Auth::user();
+
         return resolve(GetJobsAction::class)->execute(
+            $user->id,
             $this->type === 'favourite' ? true : false
         );
     }

@@ -14,6 +14,7 @@ class Job extends Model
     protected $table = 'job_roles';
 
     protected $fillable = [
+        'user_id',
         'job_site_id',
         'job_id',
         'title',
