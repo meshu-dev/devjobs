@@ -9,4 +9,5 @@ return [
     'pagination' => [
         'page_limit' => env('JOBS_PAGINATION_PAGE_LIMIT', 10),
     ],
+    'import_time' => env('JOBS_IMPORT_TIME', '15:00'),
 ];

@@ -6,7 +6,7 @@ use App\Actions\Job\ImportJobsAction;
 use App\Models\User;
 use Illuminate\Console\Command;
 
-class ImportJobs extends Command
+class ImportJobsCommand extends Command
 {
     /**
      * The name and signature of the console command.
