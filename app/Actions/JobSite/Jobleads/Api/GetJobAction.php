@@ -2,6 +2,7 @@
 
 namespace App\Actions\JobSite\Jobleads\Api;
 
+use App\Exceptions\ApiException;
 use Illuminate\Support\Facades\Http;
 
 class GetJobAction
@@ -16,6 +17,15 @@ class GetJobAction
             'Accept'     => 'application/json',
         ];
 
-        return Http::withHeaders($headers)->get($apiUrl)->json();
+        $response = Http::withHeaders($headers)
+                        ->get($apiUrl);
+
+        throw_unless(
+            $response->successful(),
+            ApiException::class,
+            'API request failed: ' . $response->getBody()
+        );
+
+        return $response->json();
     }
 }

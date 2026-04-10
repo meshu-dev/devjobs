@@ -2,6 +2,7 @@
 
 namespace App\Actions\JobSite\Jobleads\Api;
 
+use App\Exceptions\ApiException;
 use Illuminate\Support\Facades\Http;
 
 class SearchJobsAction
@@ -15,7 +16,19 @@ class SearchJobsAction
             'Accept'     => 'application/json',
         ];
 
-        return Http::withHeaders($headers)->post($apiUrl, $this->getPayload($searchTerms))->json();
+        $response = Http::withHeaders($headers)
+                        ->post(
+                            $apiUrl,
+                            $this->getPayload($searchTerms)
+                        );
+
+        throw_unless(
+            $response->successful(),
+            ApiException::class,
+            'API request failed: ' . $response->getBody()
+        );
+
+        return $response->json();
     }
 
     private function getPayload(array $searchTerms): array

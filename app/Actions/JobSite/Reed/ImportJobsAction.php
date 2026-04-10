@@ -23,6 +23,8 @@ class ImportJobsAction
             foreach ($jobs as $jobData) {
                 $this->createJob($user->id, $jobData['jobId']);
 
+                echo 'Site: Reed | Job title: ' . $jobData['jobTitle'] . ' | User: ' . $user->name . PHP_EOL;
+
                 Sleep::for(500)->milliseconds();
             }
         }

@@ -13,8 +13,7 @@ class GetJobAction
         $apiKey = config('services.reed.key');
 
         $response = Http::withBasicAuth($apiKey, '')
-                        ->get($apiUrl)
-                        ->json();
+                        ->get($apiUrl);
 
         throw_unless(
             $response->successful(),
