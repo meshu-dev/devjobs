@@ -2,6 +2,7 @@
 
 namespace App\Actions\JobSite\Reed\Api;
 
+use App\Exceptions\ApiException;
 use Illuminate\Support\Facades\Http;
 
 class SearchJobsAction
@@ -11,13 +12,20 @@ class SearchJobsAction
         $apiUrl = config('services.reed.url') . '/search';
         $apiKey = config('services.reed.key');
 
-        return Http::withBasicAuth($apiKey, '')
-                    ->get($apiUrl, [
-                        'keywords' => $search,
-                        'minimumSalary' => $minSalary,
-                        'resultsToTake' => config('services.reed.row_limit'),
-                        'resultsToSkip' => $offset,
-                    ])
-                    ->json();
+        $response = Http::withBasicAuth($apiKey, '')
+                        ->get($apiUrl, [
+                            'keywords' => $search,
+                            'minimumSalary' => $minSalary,
+                            'resultsToTake' => config('services.reed.row_limit'),
+                            'resultsToSkip' => $offset,
+                        ]);
+
+        throw_unless(
+            $response->successful(),
+            ApiException::class,
+            'API request failed: ' . $response->getBody()
+        );
+
+        return $response->json();
     }
 }

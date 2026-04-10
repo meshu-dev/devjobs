@@ -8,6 +8,7 @@ use App\Actions\JobSite\Jobleads\Api\GetJobAction;
 use App\Enums\JobSiteEnum;
 use App\Models\{Job, User};
 use Carbon\Carbon;
+use Illuminate\Support\Sleep;
 
 class ImportJobsAction
 {
@@ -19,6 +20,10 @@ class ImportJobsAction
 
         foreach ($jobs as $job) {
             $this->createJob($user->id, $job);
+
+            echo 'Site: Jobleads | Job title: ' . $job['jobTitle'] . ' | User: ' . $user->name . PHP_EOL;
+
+            Sleep::for(500)->milliseconds();
         }
     }
 

@@ -9,6 +9,7 @@ use App\Enums\JobSiteEnum;
 use App\Models\Job;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Sleep;
 
 class ImportJobsAction
 {
@@ -21,6 +22,8 @@ class ImportJobsAction
 
             foreach ($jobs as $jobData) {
                 $this->createJob($user->id, $jobData['jobId']);
+
+                Sleep::for(500)->milliseconds();
             }
         }
     }
