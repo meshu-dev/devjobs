@@ -22,6 +22,7 @@ class UserSeeder extends Seeder
                     'search_terms' => ['php developer', 'laravel developer'],
                     'min_salary'   => config('users.main.min_salary'),
                     'max_salary'   => config('users.main.max_salary'),
+                    'reset_jobs'   => false,
                 ],
             ],
             [
@@ -34,6 +35,7 @@ class UserSeeder extends Seeder
                     'search_terms' => ['php developer', 'laravel developer'],
                     'min_salary'   => config('users.demo.min_salary'),
                     'max_salary'   => config('users.demo.max_salary'),
+                    'reset_jobs'   => false,
                 ],
             ]
         ];

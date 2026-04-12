@@ -17,6 +17,7 @@ class UserProfile extends Model
         'search_terms',
         'min_salary',
         'max_salary',
+        'reset_jobs',
     ];
 
     protected $casts = [

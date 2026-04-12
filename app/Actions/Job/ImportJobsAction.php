@@ -12,6 +12,8 @@ class ImportJobsAction
 {
     public function execute(User $user): void
     {
+        resolve(ResetJobsAction::class)->execute($user);
+
         $this->runImportAction(
             [
                 ReedImportJobsAction::class,

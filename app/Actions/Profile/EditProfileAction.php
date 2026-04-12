@@ -8,12 +8,19 @@ class EditProfileAction
 {
     public function execute(array $params)
     {
-        $user             = Auth::user();
-        $user->name       = $params['name'];
-        $user->profile->min_salary = $params['min_salary'];
-        $user->profile->max_salary = $params['max_salary'];
+        $user    = Auth::user();
+        $profile = $user->profile;
+        
+        $user->name          = $params['name'];
+        $profile->min_salary = $params['min_salary'];
+        $profile->max_salary = $params['max_salary'];
 
         $user->save();
-        $user->profile->save();
+        $profile->save();
+
+        if ($profile->wasChanged()) {
+            $profile->reset_jobs = true;
+            $profile->save();
+        } 
     }
 }

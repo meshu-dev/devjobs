@@ -17,6 +17,7 @@ return new class extends Migration
             $table->json('search_terms');
             $table->integer('min_salary');
             $table->integer('max_salary');
+            $table->boolean('reset_jobs');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
