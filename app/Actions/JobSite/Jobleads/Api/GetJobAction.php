@@ -7,7 +7,10 @@ use Illuminate\Support\Facades\Http;
 
 class GetJobAction
 {
-    public function execute(string $jobId)
+    /**
+     * @return array<string, mixed>
+     */
+    public function execute(string $jobId): array
     {
         $jobId  = str_replace('external-', 'e', $jobId);
         $apiUrl = config('services.jobleads.base_url') . '/api/v3/job/detailsForAppNew/en_US/' . $jobId;
@@ -23,7 +26,7 @@ class GetJobAction
         throw_unless(
             $response->successful(),
             ApiException::class,
-            'API request failed: ' . $response->getBody()
+            'API request failed: ' . $response->body()
         );
 
         return $response->json();

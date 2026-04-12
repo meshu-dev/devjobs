@@ -6,6 +6,9 @@ use willvincent\Feeds\Facades\FeedsFacade;
 
 class GetJobsAction
 {
+    /**
+     * @return array<string, mixed>
+     */
     public function execute(): array
     {
         $url  = config('services.larajobs.url');

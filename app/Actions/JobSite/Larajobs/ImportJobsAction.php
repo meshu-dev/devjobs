@@ -23,8 +23,9 @@ class ImportJobsAction
 
     private function createJob(int $userId, Item $jobItem): void
     {
-        $jobId = Uri::of($jobItem->get_id())->pathSegments()[1];
-        $job   = resolve(GetByJobIdAction::class)->execute($userId, $jobId);
+        $jobUrl = $jobItem->get_id();
+        $jobId  = Uri::of($jobUrl)->pathSegments()[1];
+        $job    = resolve(GetByJobIdAction::class)->execute($userId, $jobId);
 
         if ($job) {
             return;

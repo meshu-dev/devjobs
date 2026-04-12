@@ -24,6 +24,9 @@ class ImportJobsAction
         );
     }
 
+    /**
+     * @param array<int, mixed> $actions
+     */
     private function runImportAction(array $actions, User $user): void
     {
         foreach ($actions as $action) {

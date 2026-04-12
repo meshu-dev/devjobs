@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Http;
 
 class SearchJobsAction
 {
+    /**
+     * @return array<string, mixed>
+     */
     public function execute(array $searchTerms)
     {
         $apiUrl = config('services.jobleads.base_url') . '/job-search/search';
@@ -25,12 +28,17 @@ class SearchJobsAction
         throw_unless(
             $response->successful(),
             ApiException::class,
-            'API request failed: ' . $response->getBody()
+            'API request failed: ' . $response->body()
         );
 
         return $response->json();
     }
 
+    /**
+     * @param array<string, mixed> $searchTerms
+     * 
+     * @return array<string, mixed>
+     */
     private function getPayload(array $searchTerms): array
     {
         return [

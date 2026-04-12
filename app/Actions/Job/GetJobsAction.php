@@ -4,7 +4,6 @@ namespace App\Actions\Job;
 
 use App\Models\Job;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Facades\Auth;
 
 class GetJobsAction
 {

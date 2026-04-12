@@ -14,7 +14,7 @@ class ImportJobsAction
 {
     public function execute(User $user): void
     {
-        $searchTerms = $user->profile->search_terms;
+        $searchTerms = $user->profile->search_terms ?? [];
         $jobs = resolve(SearchJobsAction::class)->execute($searchTerms);
         $jobs = $jobs['jobResults'];
 

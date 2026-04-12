@@ -25,7 +25,7 @@ class ImportJobsCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): void
     {
         User::all()->each(
             fn (User $user) => resolve(ImportJobsAction::class)->execute($user)    

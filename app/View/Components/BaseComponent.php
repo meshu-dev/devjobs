@@ -10,7 +10,7 @@ class BaseComponent extends Component
 {
     use Toast;
 
-    public function successWithRedirect(string $message, string $url)
+    public function successWithRedirect(string $message, string $url): void
     {
         $type = ToastEnum::SUCCESS;
 

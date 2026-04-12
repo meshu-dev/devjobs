@@ -20,7 +20,7 @@ class JobListResource extends JsonResource
             'title'     => $this->title,
             'employer'  => $this->employer,
             'location'  => $this->location,
-            'posted_at' => Carbon::createFromFormat('Y-m-d', $this->posted_at)->format('d/m/Y'),
+            'posted_at' => Carbon::createFromFormat('Y-m-d', $this->posted_at)?->format('d/m/Y'),
         ];
     }
 }

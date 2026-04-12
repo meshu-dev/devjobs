@@ -26,7 +26,7 @@ class JobResource extends JsonResource
             'min_salary'  => Number::currency($this->min_salary),
             'max_salary'  => Number::currency($this->max_salary),
             'favourited'  => $this->favourited,
-            'posted_at'   => Carbon::createFromFormat('Y-m-d', $this->posted_at)->format('d/m/Y'),
+            'posted_at'   => Carbon::createFromFormat('Y-m-d', $this->posted_at)?->format('d/m/Y'),
         ];
     }
 }

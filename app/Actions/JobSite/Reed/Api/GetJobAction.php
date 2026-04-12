@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Http;
 
 class GetJobAction
 {
+    /**
+     * @return array<string, mixed>
+     */
     public function execute(int $id): array
     {
         $apiUrl = config('services.reed.url') . "/jobs/$id";
@@ -18,7 +21,7 @@ class GetJobAction
         throw_unless(
             $response->successful(),
             ApiException::class,
-            'API request failed: ' . $response->getBody()
+            'API request failed: ' . $response->body()
         );
 
         return $response->json();

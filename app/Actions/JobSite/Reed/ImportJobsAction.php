@@ -15,9 +15,13 @@ class ImportJobsAction
 {
     public function execute(User $user): void
     {
-        $minSalary = $user->profile->min_salary;
+        $minSalary = $user->profile?->min_salary;
 
-        foreach ($user->profile->search_terms as $searchTerm) {
+        if (!$minSalary) {
+            return;
+        }
+
+        foreach ($user->profile?->search_terms as $searchTerm) {
             $jobs = $this->getReedJobs($searchTerm, $minSalary);
 
             foreach ($jobs as $jobData) {

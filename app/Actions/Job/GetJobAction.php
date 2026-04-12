@@ -10,7 +10,7 @@ class GetJobAction
     {
         $job = Job::find($id);
         
-        if (!$job->description) {
+        if ($job && $job->jobSite) {
             $job->description = config('jobs.descriptions.' . $job->jobSite->id);
         }
 
