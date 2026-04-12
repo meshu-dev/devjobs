@@ -6,21 +6,27 @@ use Illuminate\Support\Facades\Auth;
 
 class EditProfileAction
 {
-    public function execute(array $params)
+    /**
+     * @param array<string, mixed> $params
+     */
+    public function execute(array $params): void
     {
-        $user    = Auth::user();
-        $profile = $user->profile;
+        $user = Auth::user();
         
-        $user->name          = $params['name'];
-        $profile->min_salary = $params['min_salary'];
-        $profile->max_salary = $params['max_salary'];
+        if ($user && $user->profile) {
+            $profile = $user->profile;
 
-        $user->save();
-        $profile->save();
+            $user->name          = $params['name'];
+            $profile->min_salary = $params['min_salary'];
+            $profile->max_salary = $params['max_salary'];
 
-        if ($profile->wasChanged()) {
-            $profile->reset_jobs = true;
+            $user->save();
             $profile->save();
-        } 
+
+            if ($profile->wasChanged()) {
+                $profile->reset_jobs = true;
+                $profile->save();
+            }
+        }
     }
 }

@@ -7,6 +7,7 @@ use App\Actions\JobSite\Larajobs\Feed\GetJobsAction;
 use App\Enums\JobSiteEnum;
 use App\Models\{Job, User};
 use Carbon\Carbon;
+use Stringable;
 use SimplePie\Item;
 use Illuminate\Support\Uri;
 
@@ -23,7 +24,9 @@ class ImportJobsAction
 
     private function createJob(int $userId, Item $jobItem): void
     {
+        /** @var string|Stringable $jobUrl */
         $jobUrl = $jobItem->get_id();
+
         $jobId  = Uri::of($jobUrl)->pathSegments()[1];
         $job    = resolve(GetByJobIdAction::class)->execute($userId, $jobId);
 

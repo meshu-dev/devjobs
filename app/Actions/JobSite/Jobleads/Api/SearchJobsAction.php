@@ -8,9 +8,11 @@ use Illuminate\Support\Facades\Http;
 class SearchJobsAction
 {
     /**
+     * @param array<string, mixed> $searchTerms
+     * 
      * @return array<string, mixed>
      */
-    public function execute(array $searchTerms)
+    public function execute(array $searchTerms): array
     {
         $apiUrl = config('services.jobleads.base_url') . '/job-search/search';
 

@@ -7,6 +7,9 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class GetJobsAction
 {
+    /**
+     * @return LengthAwarePaginator<int, Job>
+     **/
     public function execute(int $userId, bool $favourited = false): LengthAwarePaginator
     {
         $model = Job::where('user_id', $userId)

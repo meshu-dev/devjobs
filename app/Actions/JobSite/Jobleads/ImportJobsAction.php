@@ -27,6 +27,9 @@ class ImportJobsAction
         }
     }
 
+    /**
+     * @param array<string, mixed> $job
+     */
     private function createJob(int $userId, array $job): void
     {
         $jobModel = resolve(GetByJobIdAction::class)->execute($userId, $job['id']);
@@ -53,6 +56,9 @@ class ImportJobsAction
         Job::create($params);
     }
 
+    /**
+     * @param array<string, mixed> $job
+     */
     private function getLocation(array $job): string
     {
         if (!empty($job['cityName'][0])) {

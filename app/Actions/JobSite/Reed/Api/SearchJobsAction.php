@@ -3,13 +3,12 @@
 namespace App\Actions\JobSite\Reed\Api;
 
 use App\Exceptions\ApiException;
-use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 
 class SearchJobsAction
 {
     /**
-     * @return array<int, mixed>
+     * @return array<string, mixed>
      */
     public function execute(string $search, int $minSalary, int $offset = 0): array
     {

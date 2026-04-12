@@ -21,7 +21,7 @@ class ImportJobsAction
             return;
         }
 
-        foreach ($user->profile?->search_terms as $searchTerm) {
+        foreach ($user->profile->search_terms as $searchTerm) {
             $jobs = $this->getReedJobs($searchTerm, $minSalary);
 
             foreach ($jobs as $jobData) {
@@ -34,7 +34,10 @@ class ImportJobsAction
         }
     }
 
-    private function getReedJobs(string $searchTerm, int $minSalary)
+    /**
+     * @return array<int, mixed>
+     */
+    private function getReedJobs(string $searchTerm, int $minSalary): array
     {
         $jobsResult = resolve(SearchJobsAction::class)->execute($searchTerm, $minSalary);
         $jobs       = $jobsResult['results'];
