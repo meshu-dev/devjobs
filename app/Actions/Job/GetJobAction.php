@@ -6,7 +6,7 @@ use App\Models\Job;
 
 class GetJobAction
 {
-    public function execute(int $id): Job|null
+    public function execute(string $id): Job|null
     {
         $job = Job::find($id);
         

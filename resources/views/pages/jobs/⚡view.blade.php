@@ -17,7 +17,7 @@ new class extends BaseComponent
         $this->job->favourited = !$this->job->favourited;
     }
 
-    public function mount(int $id): void
+    public function mount(string $id): void
     {
         $this->job = resolve(GetJobAction::class)->execute($id);
     }

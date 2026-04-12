@@ -18,7 +18,7 @@ return new class extends Migration
         });
 
         Schema::create('job_roles', function (Blueprint $table) {
-            $table->id();
+            $table->ulid('id')->primary();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('job_site_id');
             $table->string('job_id');
