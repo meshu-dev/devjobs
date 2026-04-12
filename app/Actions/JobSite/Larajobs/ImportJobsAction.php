@@ -13,16 +13,22 @@ use Illuminate\Support\Uri;
 
 class ImportJobsAction
 {
-    public function execute(User $user): void
+    public function execute(User $user): int
     {
-        $jobs = resolve(GetJobsAction::class)->execute();
+        $jobs  = resolve(GetJobsAction::class)->execute();
+        $count = 0;
 
         foreach ($jobs as $job) {
-            $this->createJob($user->id, $job);
+            $result = $this->createJob($user->id, $job);
+        
+            if ($result) {
+                $count++;
+            }
         }
+        return $count;
     }
 
-    private function createJob(int $userId, Item $jobItem): void
+    private function createJob(int $userId, Item $jobItem): Job|false
     {
         /** @var string|Stringable $jobUrl */
         $jobUrl = $jobItem->get_id();
@@ -31,7 +37,7 @@ class ImportJobsAction
         $job    = resolve(GetByJobIdAction::class)->execute($userId, $jobId);
 
         if ($job) {
-            return;
+            return false;
         }
 
         $data   = $jobItem->data['child']['https://larajobs.com'];
@@ -60,6 +66,6 @@ class ImportJobsAction
             'posted_at'   => Carbon::parse($jobItem->get_date()),
         ];
 
-        Job::create($params);
+        return Job::create($params);
     }
 }

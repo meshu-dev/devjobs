@@ -12,30 +12,38 @@ use Illuminate\Support\Sleep;
 
 class ImportJobsAction
 {
-    public function execute(User $user): void
+    public function execute(User $user): int
     {
         $searchTerms = $user->profile->search_terms ?? [];
+        
         $jobs = resolve(SearchJobsAction::class)->execute($searchTerms);
         $jobs = $jobs['jobResults'];
+        
+        $count = 0;
 
         foreach ($jobs as $job) {
-            $this->createJob($user->id, $job);
+            $result = $this->createJob($user->id, $job);
+
+            if ($result) {
+                $count++;
+            }
 
             echo 'Site: Jobleads | Job title: ' . $job['jobTitle'] . ' | User: ' . $user->name . PHP_EOL;
 
             Sleep::for(500)->milliseconds();
         }
+        return $count;
     }
 
     /**
      * @param array<string, mixed> $job
      */
-    private function createJob(int $userId, array $job): void
+    private function createJob(int $userId, array $job): Job|false
     {
         $jobModel = resolve(GetByJobIdAction::class)->execute($userId, $job['id']);
 
         if ($jobModel || $job['alpha2Country'] !== 'GB') {
-            return;
+            return false;
         }
 
         $params = [
@@ -53,7 +61,7 @@ class ImportJobsAction
             'posted_at'   => Carbon::parse($job['validFrom']),
         ];
 
-        Job::create($params);
+        return Job::create($params);
     }
 
     /**

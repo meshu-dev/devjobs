@@ -13,25 +13,32 @@ use Illuminate\Support\Sleep;
 
 class ImportJobsAction
 {
-    public function execute(User $user): void
+    public function execute(User $user): int|false
     {
         $minSalary = $user->profile?->min_salary;
 
         if (!$minSalary) {
-            return;
+            return false;
         }
+
+        $count = 0;
 
         foreach ($user->profile->search_terms as $searchTerm) {
             $jobs = $this->getReedJobs($searchTerm, $minSalary);
 
             foreach ($jobs as $jobData) {
-                $this->createJob($user->id, $jobData['jobId']);
+                $result = $this->createJob($user->id, $jobData['jobId']);
+
+                if ($result) {
+                    $count++;
+                }
 
                 echo 'Site: Reed | Job title: ' . $jobData['jobTitle'] . ' | User: ' . $user->name . PHP_EOL;
 
                 Sleep::for(500)->milliseconds();
             }
         }
+        return $count;
     }
 
     /**
@@ -45,12 +52,12 @@ class ImportJobsAction
         return $jobs;
     }
 
-    private function createJob(int $userId, int $jobId): void
+    private function createJob(int $userId, int $jobId): Job|false
     {
         $job = resolve(GetByJobIdAction::class)->execute($userId, $jobId);
 
         if ($job) {
-            return;
+            return false;
         }
 
         $reedJob = resolve(GetReedJobAction::class)->execute($jobId);
@@ -70,6 +77,6 @@ class ImportJobsAction
             'posted_at'   => Carbon::createFromFormat('d/m/Y', $reedJob['datePosted']),
         ];
 
-        Job::create($params);
+        return Job::create($params);
     }
 }
