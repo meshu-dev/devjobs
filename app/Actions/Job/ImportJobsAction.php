@@ -41,7 +41,7 @@ class ImportJobsAction
     }
 
     /**
-     * @param array<int, mixed> $actions
+     * @param string $action
      */
     private function runImportAction(string $action, User $user): int|false
     {
