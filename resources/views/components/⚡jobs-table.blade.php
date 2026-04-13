@@ -28,10 +28,11 @@ new class extends BaseComponent
     public function mount($type): void
     {
         $this->headers = [
-            ['key' => 'title',     'label' => 'Title'],
-            ['key' => 'jobsite',   'label' => 'Job Site'],
-            ['key' => 'location',  'label' => 'Location'],
-            ['key' => 'posted_at', 'label' => 'Posted At'],
+            ['key' => 'title',           'label' => 'Title'],
+            ['key' => 'jobsite',         'label' => 'Job Site'],
+            ['key' => 'salaryShortened', 'label' => 'Salary'],
+            ['key' => 'location',        'label' => 'Location'],
+            ['key' => 'posted_at',       'label' => 'Posted At'],
         ];
 
         $this->type = $type;

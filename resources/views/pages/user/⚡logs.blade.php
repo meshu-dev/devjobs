@@ -34,6 +34,7 @@ new class extends BaseComponent
 ?>
 
 <div>
+    <livewire:header title="Logs" />
     @if ($this->logs()->total() > 0)
         <x-table
             :headers="$headers"

@@ -44,7 +44,7 @@ new class extends BaseComponent
             </div>
             <div class="flex mb-4">
                 <span class="w-24 font-extrabold">Salary:</span>
-                <span>{{ Number::currency($job->min_salary) }} - {{ Number::currency($job->max_salary) }}</span>
+                <span>{{ $job->salary }}</span>
             </div>
         </div>
     </div>
