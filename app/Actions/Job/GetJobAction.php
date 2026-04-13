@@ -2,6 +2,7 @@
 
 namespace App\Actions\Job;
 
+use App\Enums\JobSiteEnum;
 use App\Models\Job;
 
 class GetJobAction
@@ -10,8 +11,8 @@ class GetJobAction
     {
         $job = Job::find($id);
         
-        if ($job && $job->jobSite) {
-            $job->description = config('jobs.descriptions.' . $job->jobSite->id);
+        if (!$job->description && $job->jobSite->id === JobSiteEnum::LARAJOBS->value) {
+            $job->description = config('jobs.descriptions.' . JobSiteEnum::LARAJOBS->value);
         }
 
         return $job;

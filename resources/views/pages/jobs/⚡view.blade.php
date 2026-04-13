@@ -57,5 +57,5 @@ new class extends BaseComponent
             :link="$job->url"
             external />
     </div>
-    <div class="description" wire:replace>{!! $job->description !!}</div>
+    <div class="description">{{ $job->description }}</div>
 </div>
