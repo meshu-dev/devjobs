@@ -3,7 +3,6 @@
 namespace App\Actions\Job;
 
 use Illuminate\Support\Number;
-use NumberFormatter;
 
 class GetJobSalaryAction
 {
