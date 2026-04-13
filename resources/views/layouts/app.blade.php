@@ -50,6 +50,7 @@
                 <x-menu-item title="Jobs" link="/" />
                 <x-menu-item title="Favourites" link="/favourites" />
                 <x-menu-item title="Profile" link="/profile" />
+                <x-menu-item title="Logs" link="/logs" />
             </x-menu>
         </x-slot:sidebar>
 

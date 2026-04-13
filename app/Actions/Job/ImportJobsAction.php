@@ -5,36 +5,51 @@ namespace App\Actions\Job;
 use App\Actions\JobSite\Reed\ImportJobsAction as ReedImportJobsAction;
 use App\Actions\JobSite\Larajobs\ImportJobsAction as LarajobsImportJobsAction;
 use App\Actions\JobSite\Jobleads\ImportJobsAction as JobleadsImportJobsAction;
+use App\Actions\SystemLog\CreateSystemLogAction;
+use App\Enums\JobSiteEnum;
 use App\Exceptions\ApiException;
 use App\Models\User;
 
 class ImportJobsAction
 {
+    private const LOG_MESSAGE = 'Job importer ran successfully';
+
     public function execute(User $user): void
     {
         resolve(ResetJobsAction::class)->execute($user);
 
-        $this->runImportAction(
-            [
-                ReedImportJobsAction::class,
-                LarajobsImportJobsAction::class,
-                JobleadsImportJobsAction::class,
-            ],
-            $user
+        $importers = [
+            JobSiteEnum::REED->name()     => ReedImportJobsAction::class,
+            JobSiteEnum::LARAJOBS->name() => LarajobsImportJobsAction::class,
+            JobSiteEnum::JOBLEADS->name() => JobleadsImportJobsAction::class,
+        ];
+
+        $logData = ['sites' => [], 'totalNewJobs' => 0];
+
+        foreach ($importers as $site => $importer) {
+            $result = $this->runImportAction($importer, $user);
+        
+            $logData['sites'][$site]['newJobs'] = $result;
+            $logData['totalNewJobs'] += $result;
+        }
+
+        resolve(CreateSystemLogAction::class)->execute(
+            $user->id,
+            self::LOG_MESSAGE,
+            $logData
         );
     }
 
     /**
      * @param array<int, mixed> $actions
      */
-    private function runImportAction(array $actions, User $user): void
+    private function runImportAction(string $action, User $user): int|false
     {
-        foreach ($actions as $action) {
-            try {
-                resolve($action)->execute($user);
-            } catch (ApiException $exception) {
-                echo 'Error with action ' . $action . ' | ' . $exception->getMessage() . PHP_EOL;
-            }
+        try {
+            return resolve($action)->execute($user);
+        } catch (ApiException $exception) {
+            echo 'Error with action ' . $action . ' | ' . $exception->getMessage() . PHP_EOL;
+            return false;
         }
     }
 }
