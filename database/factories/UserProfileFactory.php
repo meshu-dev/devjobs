@@ -17,8 +17,9 @@ class UserProfileFactory extends Factory
     public function definition(): array
     {
         return [
-            'min_salary' => 20000,
-            'max_salary' => 80000,
+            'search_terms' => ['php developer', 'laravel developer'],
+            'min_salary'   => 20000,
+            'max_salary'   => 80000,
         ];
     }
 }

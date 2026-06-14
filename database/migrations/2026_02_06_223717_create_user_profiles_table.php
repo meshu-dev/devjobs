@@ -11,10 +11,10 @@ return new class extends Migration
         Schema::create('user_profiles', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->index();
-            $table->json('search_terms');
+            $table->json('search_terms')->default('[]');
             $table->integer('min_salary');
             $table->integer('max_salary');
-            $table->boolean('reset_jobs');
+            $table->boolean('reset_jobs')->default(false);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
