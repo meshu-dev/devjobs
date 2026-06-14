@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\UserProfile;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Seeder;
+use App\Enums\UserEnum;
 
 class UserSeeder extends Seeder
 {
@@ -14,6 +15,7 @@ class UserSeeder extends Seeder
         $users = [
             [
                 'user' => [
+                    'id'       => UserEnum::MAIN->value,
                     'name'     => config('users.main.name'),
                     'email'    => config('users.main.email'),
                     'password' => Hash::make(config('users.main.password')),
@@ -27,6 +29,7 @@ class UserSeeder extends Seeder
             ],
             [
                 'user' => [
+                    'id'       => UserEnum::DEMO->value,
                     'name'     => config('users.demo.name'),
                     'email'    => config('users.demo.email'),
                     'password' => Hash::make(config('users.demo.password')),

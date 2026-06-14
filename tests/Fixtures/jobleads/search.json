@@ -1,0 +1,26 @@
+{
+    "jobResults": [
+        {
+            "id": 123456,
+            "jobTitle": "Software Engineer",
+            "companyName": "Tech Corp",
+            "minSalary": 60000,
+            "maxSalary": 80000,
+            "jobLink": "/job/123456",
+            "alpha2Country": "GB",
+            "salaryCurrency": "GBP",
+            "validFrom": "2024-01-01T00:00:00Z"
+        },
+        {
+            "id": 789012,
+            "jobTitle": "Senior Software Engineer",
+            "companyName": "Tech Corp",
+            "minSalary": 80000,
+            "maxSalary": 100000,
+            "jobLink": "/job/789012",
+            "alpha2Country": "GB",
+            "salaryCurrency": "GBP",
+            "validFrom": "2024-01-01T00:00:00Z"
+        }
+    ]
+}

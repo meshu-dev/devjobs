@@ -1,0 +1,42 @@
+[
+    {
+        "get_id": "https://larajobs.com/jobs/12345",
+        "get_title": "Software Engineer",
+        "get_date": "2023-06-01",
+        "data": {
+            "child": {
+                "https://larajobs.com": {
+                    "salary": {
+                        "data": "50000-60000"
+                    },
+                    "company": {
+                        "data": "Tech Corp"
+                    },
+                    "location": {
+                        "data": "London"
+                    }
+                }
+            }
+        }
+    },
+    {
+        "get_id": "https://larajobs.com/jobs/67890",
+        "get_title": "Senior Developer",
+        "get_date": "2023-06-02",
+        "data": {
+            "child": {
+                "https://larajobs.com": {
+                    "salary": {
+                        "data": "70000-80000"
+                    },
+                    "company": {
+                        "data": "Innovate Ltd"
+                    },
+                    "location": {
+                        "data": "Manchester"
+                    }
+                }
+            }
+        }
+    }
+]

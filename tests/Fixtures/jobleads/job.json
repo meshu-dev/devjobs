@@ -1,0 +1,21 @@
+{
+    "payload": {
+        "jobSummary": "Software Engineer",
+        "benefits": [
+            "Health insurance",
+            "Paid time off"
+        ],
+        "qualifications": [
+            "Bachelor's degree in Computer Science or related field",
+            "3+ years of experience in software development"
+        ],
+        "responsibilities": [
+            "Develop and maintain web applications",
+            "Collaborate with cross-functional teams"
+        ],
+        "skills": [
+            "Proficiency in PHP, JavaScript, and SQL",
+            "Experience with Laravel and Vue.js"
+        ]
+    }
+}

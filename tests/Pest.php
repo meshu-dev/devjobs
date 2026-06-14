@@ -40,7 +40,13 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function something()
+function fixtureAsJson(string $path, bool $associative = true): array
 {
-    // ..
+    $absolutePath = base_path("tests/Fixtures/{$path}.json");
+
+    if (!file_exists($absolutePath)) {
+        throw new InvalidArgumentException("Fixture file missing at: [{$absolutePath}]");
+    }
+
+    return json_decode(file_get_contents($absolutePath), $associative);
 }

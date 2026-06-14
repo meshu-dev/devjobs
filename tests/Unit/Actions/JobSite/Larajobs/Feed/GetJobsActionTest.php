@@ -7,56 +7,21 @@ describe('Larajobs - GetJobsAction tests', function () {
     it('calls Larajobs API and returns job details', function () {
         // Arrange
         $feed = new class {
+            public function __construct(private $items = null)
+            {
+            }
+
             public function get_items()
             {
-                return [
-                    (object) [
-                        'get_id' => 'https://larajobs.com/jobs/12345',
-                        'get_title' => 'Software Engineer',
-                        'get_date' => '2023-06-01',
-                        'data' => [
-                            'child' => [
-                                'https://larajobs.com' => [
-                                    'salary' => [
-                                        ['data' => '50000-60000'],
-                                    ],
-                                    'company' => [
-                                        ['data' => 'Tech Corp'],
-                                    ],
-                                    'location' => [
-                                        ['data' => 'London'],
-                                    ],
-                                ],
-                            ],
-                        ],
-                    ],
-                    (object) [
-                        'get_id' => 'https://larajobs.com/jobs/67890',
-                        'get_title' => 'Senior Developer',
-                        'get_date' => '2023-06-02',
-                        'data' => [
-                            'child' => [
-                                'https://larajobs.com' => [
-                                    'salary' => [
-                                        ['data' => '70000-80000'],
-                                    ],
-                                    'company' => [
-                                        ['data' => 'Innovate Ltd'],
-                                    ],
-                                    'location' => [
-                                        ['data' => 'Manchester'],
-                                    ],
-                                ],
-                            ],
-                        ],
-                    ],
-                ];
+                return array_map(fn ($item) => (object) $item, $this->items);
             }
         };
 
+        $feedData = fixtureAsJson('larajobs/feed', true);
+
         FeedsFacade::shouldReceive('make')
             ->once()
-            ->andReturn($feed);
+            ->andReturn($feed($feedData));
 
         // Act
         $result = resolve(GetJobsAction::class)->execute();

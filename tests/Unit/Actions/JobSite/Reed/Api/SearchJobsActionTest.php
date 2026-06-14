@@ -8,32 +8,7 @@ describe('Reed - SearchJobsAction tests', function () {
         $search = 'Software Engineer';
         $minSalary = 50000;
 
-        $response = [
-            [
-                'jobId' => 123456,
-                'jobTitle' => 'Software Engineer',
-                'jobDescription' => 'We are looking for a skilled software engineer...',
-                'employerName' => 'Tech Corp',
-                'locationName' => 'Birmingham',
-                'minimumSalary' => '50000',
-                'maximumSalary' => '60000',
-                'jobUrl' => 'https://www.reed.co.uk/jobs/software-engineer/123456',
-                'applicationCount' => '78',
-                'datePosted'   => '12/09/2025',
-            ],
-            [
-                'jobId' => 789012,
-                'jobTitle' => 'Senior Software Engineer',
-                'jobDescription' => 'We are looking for a senior software engineer...',
-                'employerName' => 'Tech Corp',
-                'locationName' => 'London',
-                'minimumSalary' => '70000',
-                'maximumSalary' => '80000',
-                'jobUrl' => 'https://www.reed.co.uk/jobs/senior-software-engineer/789012',
-                'applicationCount' => '45',
-                'datePosted'   => '15/09/2025',
-            ]
-        ];
+        $response = fixtureAsJson('reed/search', true);
 
         Http::fake(fn () => Http::response($response, 200, ['Headers']));
 
