@@ -12,8 +12,8 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(JobSiteSeeder::class);
 
-        if (App::environment('local')) {
-            // $this->call(JobSeeder::class);
+        if (!App::environment('production')) {
+            $this->call(JobSeeder::class);
         }
     }
 }
