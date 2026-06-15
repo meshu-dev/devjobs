@@ -1,28 +1,26 @@
 <?php
 
-use App\Actions\JobSite\Reed\ImportJobsAction;
-use App\Actions\JobSite\Reed\Api\{SearchJobsAction, GetJobAction};
+use App\Actions\JobSite\Jobleads\ImportJobsAction;
+use App\Actions\JobSite\Jobleads\Api\SearchJobsAction;
+use App\Actions\JobSite\Jobleads\Api\GetJobAction;
 use App\Enums\UserEnum;
 use App\Models\User;
+use SimplePie\Item;
+use SimplePie\SimplePie;
 use Mockery\MockInterface;
 
-describe('Reed - ImportJobsAction tests', function () {
-    it('imports jobs from Reed API', function () {
+describe('Jobleads - ImportJobsAction tests', function () {
+    it('imports jobs from Jobleads API', function () {
         // Arrange
         Http::fake();
 
         $user = User::find(UserEnum::MAIN->value);
-        $jobs = fixtureAsJson('reed/search');
+        $jobs = fixtureAsJson('jobleads/search');
 
         $searchJobsMock = mock(SearchJobsAction::class, function (MockInterface $mock) use ($jobs, $user) {
             $mock->shouldReceive('execute')
                 ->once()
-                ->with($user->profile->search_terms[0], $user->profile?->min_salary)
-                ->andReturn($jobs);
-
-            $mock->shouldReceive('execute')
-                ->once()
-                ->with($user->profile->search_terms[1], $user->profile?->min_salary)
+                ->with($user->profile->search_terms)
                 ->andReturn($jobs);
         });
 
@@ -31,13 +29,13 @@ describe('Reed - ImportJobsAction tests', function () {
         $getJobMock = mock(GetJobAction::class, function (MockInterface $mock) use ($jobs) {
             $mock->shouldReceive('execute')
                 ->once()
-                ->with($jobs['results'][0]['jobId'])
-                ->andReturn($jobs['results'][0]);
+                ->with($jobs['jobResults'][0]['id'])
+                ->andReturn($jobs['jobResults'][0]);
 
             $mock->shouldReceive('execute')
                 ->once()
-                ->with($jobs['results'][1]['jobId'])
-                ->andReturn($jobs['results'][1]);
+                ->with($jobs['jobResults'][1]['id'])
+                ->andReturn($jobs['jobResults'][1]);
         });
 
         $this->app->bind(GetJobAction::class, fn () => $getJobMock);

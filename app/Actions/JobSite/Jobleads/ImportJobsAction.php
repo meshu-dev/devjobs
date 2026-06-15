@@ -8,6 +8,7 @@ use App\Actions\JobSite\Jobleads\Api\GetJobAction;
 use App\Enums\JobSiteEnum;
 use App\Models\{Job, User};
 use Carbon\Carbon;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Sleep;
 
 class ImportJobsAction
@@ -28,9 +29,11 @@ class ImportJobsAction
                 $count++;
             }
 
-            echo 'Site: Jobleads | Job title: ' . $job['jobTitle'] . ' | User: ' . $user->name . PHP_EOL;
+            if (App::environment(['local', 'production'])) {
+                echo 'Site: Jobleads | Job title: ' . $job['jobTitle'] . ' | User: ' . $user->name . PHP_EOL;
 
-            Sleep::for(500)->milliseconds();
+                Sleep::for(500)->milliseconds();
+            }
         }
         return $count;
     }
