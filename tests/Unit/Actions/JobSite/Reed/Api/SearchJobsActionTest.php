@@ -13,15 +13,15 @@ describe('Reed - SearchJobsAction tests', function () {
         Http::fake(fn () => Http::response($response, 200, ['Headers']));
 
         // Act
-        $results = resolve(SearchJobsAction::class)->execute($search, $minSalary);
+        $result = resolve(SearchJobsAction::class)->execute($search, $minSalary);
 
         // Assert
-        expect($results)->toBeArray()
-            ->and($results[0]['jobId'])->toEqual(123456)
-            ->and($results[0]['jobTitle'])->toEqual('Software Engineer')
-            ->and($results[0]['employerName'])->toEqual('Tech Corp')
-            ->and($results[1]['jobId'])->toEqual(789012)
-            ->and($results[1]['jobTitle'])->toEqual('Senior Software Engineer')
-            ->and($results[1]['employerName'])->toEqual('Tech Corp');
+        expect($result['results'])->toBeArray()
+            ->and($result['results'][0]['jobId'])->toEqual(123456)
+            ->and($result['results'][0]['jobTitle'])->toEqual('Software Engineer')
+            ->and($result['results'][0]['employerName'])->toEqual('Tech Corp')
+            ->and($result['results'][1]['jobId'])->toEqual(789012)
+            ->and($result['results'][1]['jobTitle'])->toEqual('Senior Software Engineer')
+            ->and($result['results'][1]['employerName'])->toEqual('Tech Corp');
     });
 });

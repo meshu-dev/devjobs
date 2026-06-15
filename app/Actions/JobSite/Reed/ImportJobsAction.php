@@ -9,6 +9,7 @@ use App\Enums\JobSiteEnum;
 use App\Models\Job;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Sleep;
 
 class ImportJobsAction
@@ -33,9 +34,11 @@ class ImportJobsAction
                     $count++;
                 }
 
-                echo 'Site: Reed | Job title: ' . $jobData['jobTitle'] . ' | User: ' . $user->name . PHP_EOL;
+                if (App::environment(['local', 'production'])) {
+                    echo 'Site: Reed | Job title: ' . $jobData['jobTitle'] . ' | User: ' . $user->name . PHP_EOL;
 
-                Sleep::for(500)->milliseconds();
+                    Sleep::for(500)->milliseconds();
+                }
             }
         }
         return $count;

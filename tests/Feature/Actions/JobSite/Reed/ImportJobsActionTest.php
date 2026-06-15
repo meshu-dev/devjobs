@@ -1,7 +1,7 @@
 <?php
 
 use App\Actions\JobSite\Reed\ImportJobsAction;
-use App\Actions\Reed\Api\{SearchJobsAction, GetJobAction};
+use App\Actions\JobSite\Reed\Api\{SearchJobsAction, GetJobAction};
 use App\Enums\UserEnum;
 use App\Models\User;
 use Mockery\MockInterface;
@@ -9,49 +9,38 @@ use Mockery\MockInterface;
 describe('Reed - ImportJobsAction tests', function () {
     it('imports jobs from Reed API', function () {
         // Arrange
+        Http::fake();
+
         $user = User::find(UserEnum::MAIN->value);
+        $jobs = fixtureAsJson('reed/search', true);
 
-        $job = mock(SearchJobsAction::class, function (MockInterface $mock) use ($user) {
+        $searchJobsMock = mock(SearchJobsAction::class, function (MockInterface $mock) use ($jobs, $user) {
             $mock->shouldReceive('execute')
                 ->once()
-                ->andReturn([
-                    'results' => [
-                        [
-                            'jobId' => 123456,
-                            'jobTitle' => 'Software Engineer',
-                            'employerName' => 'Tech Corp',
-                        ],
-                        [
-                            'jobId' => 789012,
-                            'jobTitle' => 'Senior Software Engineer',
-                            'employerName' => 'Tech Corp',
-                        ],
-                    ],
-                ]);
-        });
+                ->with($user->profile->search_terms[0], $user->profile?->min_salary)
+                ->andReturn($jobs);
 
-        $this->app->bind(SearchJobsAction::class, fn () => $job);
-
-        $job = mock(GetJobAction::class, function (MockInterface $mock) use ($user) {
             $mock->shouldReceive('execute')
                 ->once()
-                ->andReturn([
-                    'results' => [
-                        [
-                            'jobId' => 123456,
-                            'jobTitle' => 'Software Engineer',
-                            'employerName' => 'Tech Corp',
-                        ],
-                        [
-                            'jobId' => 789012,
-                            'jobTitle' => 'Senior Software Engineer',
-                            'employerName' => 'Tech Corp',
-                        ],
-                    ],
-                ]);
+                ->with($user->profile->search_terms[1], $user->profile?->min_salary)
+                ->andReturn($jobs);
         });
 
-        $this->app->bind(GetJobAction::class, fn () => $job);
+        $this->app->bind(SearchJobsAction::class, fn () => $searchJobsMock);
+
+        $getJobMock = mock(GetJobAction::class, function (MockInterface $mock) use ($jobs) {
+            $mock->shouldReceive('execute')
+                ->once()
+                ->with($jobs['results'][0]['jobId'])
+                ->andReturn($jobs['results'][0]);
+
+            $mock->shouldReceive('execute')
+                ->once()
+                ->with($jobs['results'][1]['jobId'])
+                ->andReturn($jobs['results'][1]);
+        });
+
+        $this->app->bind(GetJobAction::class, fn () => $getJobMock);
 
         // Act
         $result = resolve(ImportJobsAction::class)->execute($user);
