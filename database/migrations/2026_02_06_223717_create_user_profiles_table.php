@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('user_profiles', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->index();
-            $table->json('search_terms')->default('[]');
+            $table->json('search_terms')->nullable();
             $table->integer('min_salary');
             $table->integer('max_salary');
             $table->boolean('reset_jobs')->default(false);

@@ -2,10 +2,11 @@
 
 use Livewire\Livewire;
 
-it('renders successfully', function () {
-    $title = 'Job Listings';
+describe('Header tests', function () {
+    it('renders header component with title', function () {
+        $title = 'Job Listings';
 
-    Livewire::test('header')
-        ->set('title', $title)
-        ->assertSee($title);
+        Livewire::test('header', ['title' => $title])
+            ->assertSee($title);
+    });
 });

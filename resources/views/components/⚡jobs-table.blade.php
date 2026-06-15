@@ -53,7 +53,8 @@ new class extends BaseComponent
                 {{ $job->jobSite->name }}
             @endscope 
             @scope('cell_posted_at', $job)
-                {{ Carbon::createFromFormat('Y-m-d', $job->posted_at)->format('d/m/Y') }}
+                {{ $job->posted_at }}
+                /* Carbon::createFromFormat('Y-m-d', $job->posted_at)->format('d/m/Y') */
             @endscope 
         </x-table>
     @else
