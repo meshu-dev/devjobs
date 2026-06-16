@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id')->index();
             $table->string('text');
-            $table->json('context');
+            $table->json('context')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

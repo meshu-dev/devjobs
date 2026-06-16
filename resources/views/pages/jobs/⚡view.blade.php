@@ -40,7 +40,8 @@ new class extends BaseComponent
         <div class="flex-1">
             <div class="flex mb-4">
                 <span class="w-24 font-extrabold">Posted At:</span>
-                <span>{{ Carbon::createFromFormat('Y-m-d', $job->posted_at)->format('d/m/Y') }}</span>
+                <span>{{ $job->posted_at }}</span>
+                /* Carbon::createFromFormat('Y-m-d', $job->posted_at)->format('d/m/Y') */
             </div>
             <div class="flex mb-4">
                 <span class="w-24 font-extrabold">Salary:</span>

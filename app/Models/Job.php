@@ -30,6 +30,7 @@ class Job extends Model
         'min_salary',
         'max_salary',
         'url',
+        'favourited',
         'params',
         'posted_at',
     ];
