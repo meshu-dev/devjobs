@@ -13,7 +13,6 @@ class AppBrand extends Component
      */
     public function __construct()
     {
-        //
     }
 
     /**

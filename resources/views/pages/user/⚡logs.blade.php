@@ -44,7 +44,8 @@ new class extends BaseComponent
                 {{ $log['context']['totalNewJobs'] }}
             @endscope 
             @scope('cell_created_at', $log)
-                {{ Carbon::parse($log->created_at)->format('d/m/Y') }}
+                {{ $log->created_at }}
+                /* Carbon::parse($log->created_at)->format('d/m/Y') */
             @endscope 
         </x-table>
     @else

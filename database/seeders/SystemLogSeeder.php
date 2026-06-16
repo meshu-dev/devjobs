@@ -14,6 +14,7 @@ class SystemLogSeeder extends Seeder
             [
                 'user_id' => UserEnum::MAIN->value,
                 'text'    => 'Job importer ran successfully',
+                'context' => json_encode(['totalNewJobs' => 3])
             ],
         ]);
     }
