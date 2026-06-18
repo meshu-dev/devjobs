@@ -1,0 +1,93 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  ACTIONS_RUNNER_DEBUG: true
+  PHP_VERSION: 8.5
+
+jobs:
+  phpunit:
+    name: Run PHP unit tests
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          MYSQL_DATABASE: meshpro_test
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    env:
+      DB_USERNAME: root
+      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      DB_DATABASE: meshpro_test
+
+    steps:
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ env.PHP_VERSION }}
+          coverage: xdebug
+
+      - uses: actions/checkout@v4
+        
+      - name: Install composer packages
+        run: composer install --prefer-dist -q --no-interaction --no-scripts --no-ansi --no-progress
+        
+      - name: Install node modules
+        run: npm ci
+
+      - name: Copy .env
+        run: cp .env.github .env
+
+      - name: Generate key
+        run: php artisan key:generate
+
+      - name: Build node modules
+        run: npm run build
+        
+      - name: Run tests with code coverage
+        run: composer run test
+
+  phpstan:
+    name: Run PHPStan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ env.PHP_VERSION }}
+      
+      - uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        run: composer install --prefer-dist -q --no-interaction --no-scripts --no-ansi --no-progress 
+
+      - name: Run PHPStan
+        run: composer run phpstan
+
+  pint:
+    name: Run Laravel Pint - PSR-12
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ env.PHP_VERSION }}
+      
+      - uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        run: composer install --prefer-dist -q --no-interaction --no-scripts --no-ansi --no-progress 
+
+      - name: Run pint
+        run: composer run test:lint
