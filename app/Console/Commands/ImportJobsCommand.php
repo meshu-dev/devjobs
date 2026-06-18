@@ -2,8 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Actions\Job\ImportJobsAction;
-use App\Models\User;
+use App\Actions\Job\ImportAllUserJobsAction;
 use Illuminate\Console\Command;
 
 class ImportJobsCommand extends Command
@@ -27,8 +26,6 @@ class ImportJobsCommand extends Command
      */
     public function handle(): void
     {
-        User::all()->each(
-            fn (User $user) => resolve(ImportJobsAction::class)->execute($user)    
-        );
+        resolve(ImportAllUserJobsAction::class)->execute();
     }
 }

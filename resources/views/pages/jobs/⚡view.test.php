@@ -27,7 +27,8 @@ describe('Jobs - view page tests', function () {
             ->test('pages::jobs.view', ['id' => $this->job->id])
             ->assertSee('Favourite')
             ->assertDontSee('Unfavourite')
-            ->call('toggleFavourite');
+            ->call('toggleFavourite')
+            ->assertSee('Unfavourite');
 
         $this->assertAuthenticated();
     });
