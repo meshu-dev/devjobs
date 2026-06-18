@@ -2,9 +2,9 @@
 
 use Livewire\Attributes\Validate;
 use Livewire\Attributes\Layout;
-use Livewire\Component;
+use App\View\Components\BaseComponent;
 
-new #[Layout('layouts::auth')] class extends Component
+new #[Layout('layouts::auth')] class extends BaseComponent
 {
     #[Validate('required|email')] 
     public string $email = '';
@@ -37,12 +37,9 @@ new #[Layout('layouts::auth')] class extends Component
     private function login(array $params)
     {
         if (Auth::attempt($params)) {
-            session()->regenerate();
-            session()->flash('status', 'You have successfully logged in');
-
-            return redirect('/');
+            $this->notify(ToastEnum::SUCCESS, 'You have successfully logged in', '/');
         }
-        session()->flash('status', 'Login was unsuccessful');
+        $this->notify(ToastEnum::ERROR, 'Login was unsuccessful');
     }
 };
 ?>

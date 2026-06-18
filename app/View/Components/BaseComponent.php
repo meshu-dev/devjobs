@@ -10,16 +10,14 @@ class BaseComponent extends Component
 {
     use Toast;
 
-    public function successWithRedirect(string $message, string $url): void
+    public function notify(ToastEnum $type, string $message, ?string $redirectUrl = null): void
     {
-        $type = ToastEnum::SUCCESS;
-
         $this->toast(
             type: $type->value,
             title: $message,
             icon: $type->getIcon(),
             css: $type->getCss(),
-            redirectTo: $url
+            redirectTo: $redirectUrl
         );
     }
 }

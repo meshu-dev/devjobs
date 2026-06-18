@@ -2,6 +2,7 @@
 
 use App\Actions\Profile\EditProfileAction;
 use App\View\Components\BaseComponent;
+use App\View\Enums\ToastEnum;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
@@ -47,7 +48,7 @@ new class extends BaseComponent
 
         resolve(EditProfileAction::class)->execute($params);
 
-        $this->success('Profile has been updated');
+        $this->notify(ToastEnum::SUCCESS, 'Profile has been updated');
     }
 
     public function mount()
