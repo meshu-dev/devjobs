@@ -12,7 +12,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(JobSiteSeeder::class);
 
-        if (!App::environment('production')) {
+        if (! App::environment('production')) {
             $this->call(JobSeeder::class);
             $this->call(SystemLogSeeder::class);
         }

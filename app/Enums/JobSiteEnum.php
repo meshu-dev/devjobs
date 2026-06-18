@@ -11,7 +11,7 @@ enum JobSiteEnum: int
     public function name(): string
     {
         return match ($this) {
-            self::REED     => 'Reed',
+            self::REED => 'Reed',
             self::LARAJOBS => 'Larajobs',
             self::JOBLEADS => 'Jobleads',
         };
@@ -20,7 +20,7 @@ enum JobSiteEnum: int
     public function url(): string
     {
         return match ($this) {
-            self::REED     => 'https://www.reed.co.uk',
+            self::REED => 'https://www.reed.co.uk',
             self::LARAJOBS => 'https://larajobs.com',
             self::JOBLEADS => 'https://www.jobleads.com',
         };

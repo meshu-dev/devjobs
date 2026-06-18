@@ -11,11 +11,13 @@ class GetJobSalaryAction
         if (strlen($minSalary) >= 5 && strlen($maxSalary) >= 5) {
             if ($abbreviated === true) {
                 $symbol = '£';
-                return $symbol . Number::abbreviate($minSalary) . ' - ' . $symbol . Number::abbreviate($maxSalary);
+
+                return $symbol.Number::abbreviate($minSalary).' - '.$symbol.Number::abbreviate($maxSalary);
             } else {
-                return Number::currency($minSalary) . ' - ' . Number::currency($maxSalary);
+                return Number::currency($minSalary).' - '.Number::currency($maxSalary);
             }
         }
+
         return 'N/A';
     }
 }

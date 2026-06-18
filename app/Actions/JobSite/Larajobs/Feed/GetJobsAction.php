@@ -11,7 +11,7 @@ class GetJobsAction
      */
     public function execute(): array
     {
-        $url  = config('services.larajobs.url');
+        $url = config('services.larajobs.url');
 
         $feed = FeedsFacade::make($url);
         $jobs = $feed->get_items();

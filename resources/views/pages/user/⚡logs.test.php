@@ -1,8 +1,8 @@
 <?php
 
+use App\Enums\UserEnum;
 use App\Models\User;
 use Livewire\Livewire;
-use App\Enums\UserEnum;
 
 describe('User - logs page tests', function () {
     it('renders user logs page', function () {

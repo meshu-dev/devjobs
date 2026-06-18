@@ -12,16 +12,16 @@ class GetJobAction
      */
     public function execute(int $id): array
     {
-        $apiUrl = config('services.reed.url') . "/jobs/$id";
+        $apiUrl = config('services.reed.url')."/jobs/$id";
         $apiKey = config('services.reed.key');
 
         $response = Http::withBasicAuth($apiKey, '')
-                        ->get($apiUrl);
+            ->get($apiUrl);
 
         throw_unless(
             $response->successful(),
             ApiException::class,
-            'API request failed: ' . $response->body()
+            'API request failed: '.$response->body()
         );
 
         return $response->json();

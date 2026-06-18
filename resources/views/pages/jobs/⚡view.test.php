@@ -1,13 +1,13 @@
 <?php
 
 use App\Enums\JobEnum;
-use App\Models\User;
-use Livewire\Livewire;
 use App\Enums\UserEnum;
 use App\Models\Job;
+use App\Models\User;
+use Livewire\Livewire;
 
 describe('Jobs - view page tests', function () {
-    beforeEach(function() {
+    beforeEach(function () {
         $this->job = Job::find(JobEnum::SOFTWARE_ENGINEER->value);
     });
 

@@ -12,21 +12,21 @@ class GetJobAction
      */
     public function execute(string $jobId): array
     {
-        $jobId  = str_replace('external-', 'e', $jobId);
-        $apiUrl = config('services.jobleads.base_url') . '/api/v3/job/detailsForAppNew/en_US/' . $jobId;
+        $jobId = str_replace('external-', 'e', $jobId);
+        $apiUrl = config('services.jobleads.base_url').'/api/v3/job/detailsForAppNew/en_US/'.$jobId;
 
         $headers = [
             'User-Agent' => config('services.jobleads.user_agent'),
-            'Accept'     => 'application/json',
+            'Accept' => 'application/json',
         ];
 
         $response = Http::withHeaders($headers)
-                        ->get($apiUrl);
+            ->get($apiUrl);
 
         throw_unless(
             $response->successful(),
             ApiException::class,
-            'API request failed: ' . $response->body()
+            'API request failed: '.$response->body()
         );
 
         return $response->json();

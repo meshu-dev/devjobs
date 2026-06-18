@@ -14,6 +14,7 @@ class Job extends Model
 {
     /** @use HasFactory<\Database\Factories\JobFactory> */
     use HasFactory;
+
     use HasUlids;
 
     protected $table = 'job_roles';

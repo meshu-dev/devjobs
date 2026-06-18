@@ -9,7 +9,7 @@ class ImportAllUserJobsAction
     public function execute(): void
     {
         User::all()->each(
-            fn (User $user) => resolve(ImportJobsAction::class)->execute($user) 
+            fn (User $user) => resolve(ImportJobsAction::class)->execute($user)
         );
     }
 }

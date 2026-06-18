@@ -44,7 +44,7 @@ function fixtureAsJson(string $path, bool $associative = true): array
 {
     $absolutePath = base_path("tests/Fixtures/{$path}.json");
 
-    if (!file_exists($absolutePath)) {
+    if (! file_exists($absolutePath)) {
         throw new InvalidArgumentException("Fixture file missing at: [{$absolutePath}]");
     }
 

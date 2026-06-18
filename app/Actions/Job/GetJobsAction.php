@@ -13,7 +13,7 @@ class GetJobsAction
     public function execute(int $userId, bool $favourited = false): LengthAwarePaginator
     {
         $model = Job::where('user_id', $userId)
-                    ->orderBy('posted_at', 'desc');
+            ->orderBy('posted_at', 'desc');
 
         $model = $favourited ? $model->where('favourited', true) : $model;
 

@@ -2,9 +2,9 @@
 
 namespace App\Actions\Job;
 
-use App\Actions\JobSite\Reed\ImportJobsAction as ReedImportJobsAction;
-use App\Actions\JobSite\Larajobs\ImportJobsAction as LarajobsImportJobsAction;
 use App\Actions\JobSite\Jobleads\ImportJobsAction as JobleadsImportJobsAction;
+use App\Actions\JobSite\Larajobs\ImportJobsAction as LarajobsImportJobsAction;
+use App\Actions\JobSite\Reed\ImportJobsAction as ReedImportJobsAction;
 use App\Actions\SystemLog\CreateSystemLogAction;
 use App\Enums\JobSiteEnum;
 use App\Exceptions\ApiException;
@@ -19,7 +19,7 @@ class ImportJobsAction
         resolve(ResetJobsAction::class)->execute($user);
 
         $importers = [
-            JobSiteEnum::REED->name()     => ReedImportJobsAction::class,
+            JobSiteEnum::REED->name() => ReedImportJobsAction::class,
             JobSiteEnum::LARAJOBS->name() => LarajobsImportJobsAction::class,
             JobSiteEnum::JOBLEADS->name() => JobleadsImportJobsAction::class,
         ];
@@ -28,7 +28,7 @@ class ImportJobsAction
 
         foreach ($importers as $site => $importer) {
             $result = $this->runImportAction($importer, $user);
-        
+
             $logData['sites'][$site]['newJobs'] = $result;
             $logData['totalNewJobs'] += $result;
         }
@@ -40,15 +40,13 @@ class ImportJobsAction
         );
     }
 
-    /**
-     * @param string $action
-     */
     private function runImportAction(string $action, User $user): int|false
     {
         try {
             return resolve($action)->execute($user);
         } catch (ApiException $exception) {
-            echo 'Error with action ' . $action . ' | ' . $exception->getMessage() . PHP_EOL;
+            echo 'Error with action '.$action.' | '.$exception->getMessage().PHP_EOL;
+
             return false;
         }
     }

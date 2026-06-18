@@ -1,10 +1,10 @@
 <?php
 
 use App\Enums\JobEnum;
-use App\Models\User;
-use Livewire\Livewire;
 use App\Enums\UserEnum;
 use App\Models\Job;
+use App\Models\User;
+use Livewire\Livewire;
 
 describe('JobsList tests', function () {
     it('renders jobs list', function () {

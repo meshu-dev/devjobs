@@ -16,7 +16,6 @@ describe('ImportAllUserJobs tests', function () {
 
         $this->app->bind(ImportJobsAction::class, fn () => $actionMock);
 
-
         // Act
         resolve(ImportAllUserJobsAction::class)->execute();
     });

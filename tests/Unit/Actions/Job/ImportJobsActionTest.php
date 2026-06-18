@@ -1,9 +1,10 @@
 <?php
 
-use App\Actions\Job\{ImportJobsAction, ResetJobsAction};
-use App\Actions\JobSite\Reed\ImportJobsAction as ReedImportJobsAction;
-use App\Actions\JobSite\Larajobs\ImportJobsAction as LarajobsImportJobsAction;
+use App\Actions\Job\ImportJobsAction;
+use App\Actions\Job\ResetJobsAction;
 use App\Actions\JobSite\Jobleads\ImportJobsAction as JobleadsImportJobsAction;
+use App\Actions\JobSite\Larajobs\ImportJobsAction as LarajobsImportJobsAction;
+use App\Actions\JobSite\Reed\ImportJobsAction as ReedImportJobsAction;
 use App\Actions\SystemLog\CreateSystemLogAction;
 use App\Models\User;
 use Mockery\MockInterface;
@@ -27,9 +28,9 @@ describe('ImportJobsAction tests', function () {
             LarajobsImportJobsAction::class,
             JobleadsImportJobsAction::class,
         ];
-        
+
         foreach ($importers as $importer) {
-            $jobMock = mock($importer, function (MockInterface $mock) use ($user) {
+            $jobMock = mock($importer, function (MockInterface $mock) {
                 $mock->shouldReceive('execute')
                     ->once();
             });
@@ -38,7 +39,7 @@ describe('ImportJobsAction tests', function () {
 
         }
 
-        $job = mock(CreateSystemLogAction::class, function (MockInterface $mock) use ($user) {
+        $job = mock(CreateSystemLogAction::class, function (MockInterface $mock) {
             $mock->shouldReceive('execute')
                 ->once();
         });

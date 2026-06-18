@@ -36,10 +36,10 @@ return [
     ],
 
     'reed' => [
-        'url'        => 'https://www.reed.co.uk/api/1.0',
-        'key'        => env('REED_API_KEY'),
+        'url' => 'https://www.reed.co.uk/api/1.0',
+        'key' => env('REED_API_KEY'),
         'min_salary' => env('REED_API_MIN_SALARY', 20000),
-        'row_limit'  => env('REED_API_ROW_LIMIT', 100),
+        'row_limit' => env('REED_API_ROW_LIMIT', 100),
     ],
 
     'larajobs' => [
@@ -48,6 +48,6 @@ return [
 
     'jobleads' => [
         'base_url' => 'https://www.jobleads.com',
-        'user_agent' => "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
-    ]
+        'user_agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+    ],
 ];

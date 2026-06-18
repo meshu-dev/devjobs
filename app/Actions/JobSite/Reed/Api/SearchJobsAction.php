@@ -12,21 +12,21 @@ class SearchJobsAction
      */
     public function execute(string $search, int $minSalary, int $offset = 0): array
     {
-        $apiUrl = config('services.reed.url') . '/search';
+        $apiUrl = config('services.reed.url').'/search';
         $apiKey = config('services.reed.key');
 
         $response = Http::withBasicAuth($apiKey, '')
-                        ->get($apiUrl, [
-                            'keywords' => $search,
-                            'minimumSalary' => $minSalary,
-                            'resultsToTake' => config('services.reed.row_limit'),
-                            'resultsToSkip' => $offset,
-                        ]);
+            ->get($apiUrl, [
+                'keywords' => $search,
+                'minimumSalary' => $minSalary,
+                'resultsToTake' => config('services.reed.row_limit'),
+                'resultsToSkip' => $offset,
+            ]);
 
         throw_unless(
             $response->successful(),
             ApiException::class,
-            'API request failed: ' . $response->body()
+            'API request failed: '.$response->body()
         );
 
         return $response->json();

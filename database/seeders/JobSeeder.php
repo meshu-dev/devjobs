@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Enums\{JobEnum, JobSiteEnum, UserEnum};
+use App\Enums\JobEnum;
+use App\Enums\JobSiteEnum;
+use App\Enums\UserEnum;
 use App\Models\Job;
 use Illuminate\Database\Seeder;
 
@@ -34,7 +36,7 @@ class JobSeeder extends Seeder
                 'job_id' => 3,
                 'title' => 'Laravel Developer',
                 'favourited' => true,
-            ]
+            ],
         ];
 
         foreach ($jobs as $job) {

@@ -13,8 +13,8 @@ class SystemLogSeeder extends Seeder
         SystemLog::insert([
             [
                 'user_id' => UserEnum::MAIN->value,
-                'text'    => 'Job importer ran successfully',
-                'context' => json_encode(['totalNewJobs' => 3])
+                'text' => 'Job importer ran successfully',
+                'context' => json_encode(['totalNewJobs' => 3]),
             ],
         ]);
     }

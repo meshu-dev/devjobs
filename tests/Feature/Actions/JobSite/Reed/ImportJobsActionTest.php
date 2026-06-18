@@ -1,7 +1,8 @@
 <?php
 
+use App\Actions\JobSite\Reed\Api\GetJobAction;
+use App\Actions\JobSite\Reed\Api\SearchJobsAction;
 use App\Actions\JobSite\Reed\ImportJobsAction;
-use App\Actions\JobSite\Reed\Api\{SearchJobsAction, GetJobAction};
 use App\Enums\UserEnum;
 use App\Models\User;
 use Mockery\MockInterface;

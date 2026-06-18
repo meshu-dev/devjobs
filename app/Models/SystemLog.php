@@ -9,7 +9,7 @@ class SystemLog extends Model
     protected $fillable = [
         'user_id',
         'text',
-        'context'
+        'context',
     ];
 
     protected $casts = [

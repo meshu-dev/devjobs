@@ -7,10 +7,9 @@ describe('Larajobs - GetJobsAction tests', function () {
     it('calls Larajobs API and returns job details', function () {
         // Arrange
         $feedData = fixtureAsJson('larajobs/feed', true);
-        $feed = new class ($feedData) {
-            public function __construct(private $items = null)
-            {
-            }
+        $feed = new class($feedData)
+        {
+            public function __construct(private $items = null) {}
 
             public function get_items()
             {

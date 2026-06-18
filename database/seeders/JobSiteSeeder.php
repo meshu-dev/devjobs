@@ -12,20 +12,20 @@ class JobSiteSeeder extends Seeder
     {
         JobSite::insert([
             [
-                'id'   => JobSiteEnum::REED->value,
+                'id' => JobSiteEnum::REED->value,
                 'name' => JobSiteEnum::REED->name(),
-                'url'  => JobSiteEnum::REED->url(),
+                'url' => JobSiteEnum::REED->url(),
             ],
             [
-                'id'   => JobSiteEnum::LARAJOBS->value,
+                'id' => JobSiteEnum::LARAJOBS->value,
                 'name' => JobSiteEnum::LARAJOBS->name(),
-                'url'  => JobSiteEnum::LARAJOBS->url(),
+                'url' => JobSiteEnum::LARAJOBS->url(),
             ],
             [
-                'id'   => JobSiteEnum::JOBLEADS->value,
+                'id' => JobSiteEnum::JOBLEADS->value,
                 'name' => JobSiteEnum::JOBLEADS->name(),
-                'url'  => JobSiteEnum::JOBLEADS->url(),
-            ]
+                'url' => JobSiteEnum::JOBLEADS->url(),
+            ],
         ]);
     }
 }

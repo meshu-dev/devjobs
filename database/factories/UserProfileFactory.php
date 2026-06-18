@@ -18,8 +18,8 @@ class UserProfileFactory extends Factory
     {
         return [
             'search_terms' => ['php developer', 'laravel developer'],
-            'min_salary'   => 20000,
-            'max_salary'   => 80000,
+            'min_salary' => 20000,
+            'max_salary' => 80000,
         ];
     }
 }

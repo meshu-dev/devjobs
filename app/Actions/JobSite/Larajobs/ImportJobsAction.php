@@ -5,26 +5,28 @@ namespace App\Actions\JobSite\Larajobs;
 use App\Actions\Job\GetByJobIdAction;
 use App\Actions\JobSite\Larajobs\Feed\GetJobsAction;
 use App\Enums\JobSiteEnum;
-use App\Models\{Job, User};
+use App\Models\Job;
+use App\Models\User;
 use Carbon\Carbon;
-use Stringable;
-use SimplePie\Item;
 use Illuminate\Support\Uri;
+use SimplePie\Item;
+use Stringable;
 
 class ImportJobsAction
 {
     public function execute(User $user): int
     {
-        $jobs  = resolve(GetJobsAction::class)->execute();
+        $jobs = resolve(GetJobsAction::class)->execute();
         $count = 0;
 
         foreach ($jobs as $job) {
             $result = $this->createJob($user->id, $job);
-        
+
             if ($result) {
                 $count++;
             }
         }
+
         return $count;
     }
 
@@ -33,14 +35,14 @@ class ImportJobsAction
         /** @var string|Stringable $jobUrl */
         $jobUrl = $jobItem->get_id();
 
-        $jobId  = Uri::of($jobUrl)->pathSegments()[1];
-        $job    = resolve(GetByJobIdAction::class)->execute($userId, $jobId);
+        $jobId = Uri::of($jobUrl)->pathSegments()[1];
+        $job = resolve(GetByJobIdAction::class)->execute($userId, $jobId);
 
         if ($job) {
             return false;
         }
 
-        $data   = $jobItem->data['child']['https://larajobs.com'];
+        $data = $jobItem->data['child']['https://larajobs.com'];
         $salary = $data['salary'][0]['data'];
 
         if (str_contains($salary, '-')) {
@@ -52,18 +54,18 @@ class ImportJobsAction
         }
 
         $params = [
-            'user_id'     => $userId,
+            'user_id' => $userId,
             'job_site_id' => JobSiteEnum::LARAJOBS->value,
-            'job_id'      => $jobId,
-            'title'       => $jobItem->get_title(),
+            'job_id' => $jobId,
+            'title' => $jobItem->get_title(),
             'description' => null,
-            'employer'    => $data['company'][0]['data'] ?? '',
-            'location'    => $data['location'][0]['data'] ?? '',
-            'min_salary'  => $minSalary > 0 ? (int) $minSalary : 0,
-            'max_salary'  => $maxSalary > 0 ? (int) $maxSalary : 0,
-            'url'         => $jobItem->get_link(),
-            'params'      => [],
-            'posted_at'   => Carbon::parse($jobItem->get_date()),
+            'employer' => $data['company'][0]['data'] ?? '',
+            'location' => $data['location'][0]['data'] ?? '',
+            'min_salary' => $minSalary > 0 ? (int) $minSalary : 0,
+            'max_salary' => $maxSalary > 0 ? (int) $maxSalary : 0,
+            'url' => $jobItem->get_link(),
+            'params' => [],
+            'posted_at' => Carbon::parse($jobItem->get_date()),
         ];
 
         return Job::create($params);

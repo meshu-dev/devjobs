@@ -1,12 +1,12 @@
 <?php
 
-use App\Actions\JobSite\Larajobs\ImportJobsAction;
 use App\Actions\JobSite\Larajobs\Feed\GetJobsAction;
+use App\Actions\JobSite\Larajobs\ImportJobsAction;
 use App\Enums\UserEnum;
 use App\Models\User;
+use Mockery\MockInterface;
 use SimplePie\Item;
 use SimplePie\SimplePie;
-use Mockery\MockInterface;
 
 describe('Larajobs - ImportJobsAction tests', function () {
     it('imports jobs from Larajobs API', function () {
@@ -19,7 +19,7 @@ describe('Larajobs - ImportJobsAction tests', function () {
 
         foreach ($jobs as $job) {
             $list[] = new Item(
-                new SimplePie(),
+                new SimplePie,
                 [
                     'title' => $job['get_title'],
                     'id' => $job['get_id'],
