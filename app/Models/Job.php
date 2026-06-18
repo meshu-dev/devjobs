@@ -44,6 +44,11 @@ class Job extends Model
         ];
     }
 
+    /**
+     * Get the short version of the salary value
+     *
+     * @return Attribute<string|int, never>
+     */
     protected function salaryShortened(): Attribute
     {
         return Attribute::make(
@@ -57,6 +62,11 @@ class Job extends Model
         );
     }
 
+    /**
+     * Get min and max salary values combined into single string
+     *
+     * @return Attribute<string, never>
+     */
     protected function salary(): Attribute
     {
         return Attribute::make(
