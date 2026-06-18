@@ -11,7 +11,7 @@ class GetJobAction
     {
         $job = Job::find($id);
 
-        if (! $job->description && $job->jobSite->id === JobSiteEnum::LARAJOBS->value) {
+        if ($job?->description && $job->jobSite?->id === JobSiteEnum::LARAJOBS->value) {
             $job->description = config('jobs.descriptions.'.JobSiteEnum::LARAJOBS->value);
         }
 

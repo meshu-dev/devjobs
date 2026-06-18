@@ -18,7 +18,7 @@ class ImportJobsAction
     {
         $minSalary = $user->profile?->min_salary;
 
-        if (! $minSalary) {
+        if (! $minSalary || ! $user->profile->search_terms) {
             return false;
         }
 

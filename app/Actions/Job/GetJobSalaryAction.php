@@ -8,7 +8,7 @@ class GetJobSalaryAction
 {
     public function execute(int $minSalary, int $maxSalary, bool $abbreviated = false): string|int
     {
-        if (strlen($minSalary) >= 5 && strlen($maxSalary) >= 5) {
+        if (strlen(strval($minSalary)) >= 5 && strlen(strval($maxSalary)) >= 5) {
             if ($abbreviated === true) {
                 $symbol = '£';
 
