@@ -15,7 +15,7 @@
     {{-- NAVBAR mobile only --}}
     <x-nav sticky class="lg:hidden">
         <x-slot:brand>
-            <x-app-brand />
+            <livewire:layout-header />
         </x-slot:brand>
         <x-slot:actions>
             <label for="main-drawer" class="lg:hidden me-3">
@@ -30,7 +30,7 @@
         <x-slot:sidebar drawer="main-drawer" collapsible class="bg-base-100 lg:bg-inherit">
 
             {{-- BRAND --}}
-            <div class="text-4xl font-semibold text-center mt-4">DevJobs</div>
+            <div class="text-4xl font-semibold text-center mt-4">DevJobs 2</div>
 
             {{-- MENU --}}
             <x-menu activate-by-route>
