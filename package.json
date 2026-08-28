@@ -13,6 +13,6 @@
         "daisyui": "^5.5.18",
         "laravel-vite-plugin": "^2.0.0",
         "tailwindcss": "^4.1.18",
-        "vite": "^7.0.7"
+        "vite": "^7.3.2"
     }
 }
