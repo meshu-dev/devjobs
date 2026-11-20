@@ -1,5 +1,8 @@
 <?php
 
+use Tests\FeatureTestCase;
+use Tests\TestCase;
+
 /*
 |--------------------------------------------------------------------------
 | Test Case
@@ -11,8 +14,8 @@
 |
 */
 
-uses(Tests\FeatureTestCase::class)->in('Feature', '../resources/views');
-uses(Tests\TestCase::class)->in('Unit');
+uses(FeatureTestCase::class)->in('Feature', '../resources/views');
+uses(TestCase::class)->in('Unit');
 
 /*
 |--------------------------------------------------------------------------
