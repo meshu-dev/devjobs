@@ -4,38 +4,71 @@
 @source '../../storage/framework/views/*.php';
 @source '../**/*.blade.php';
 @source '../**/*.js';
+@source '../../app/View/**/*.php';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    --font-sans: 'Schibsted Grotesk', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+
+    /* Highlighter yellow: only used for the target salary range and favourite stars */
+    --color-highlight: #f4dc4a;
+    --color-muted: #5e6878;
 }
-
-
-
-/**
-    The lines above are intact.
-    The lines below were added by maryUI installer.
-*/
 
 /** daisyUI */
 @plugin "daisyui" {
-    themes: corporate --default;
-    /* themes: light --default, dark --prefersdark; */
+    themes: false;
+}
+
+@plugin "daisyui/theme" {
+    name: "devjobs";
+    default: true;
+    color-scheme: light;
+
+    --color-base-100: #ffffff;
+    --color-base-200: #e8ebe3;
+    --color-base-300: #dee1da;
+    --color-base-content: #1c2433;
+    --color-primary: #2e3f8f;
+    --color-primary-content: #ffffff;
+    --color-secondary: #5e6878;
+    --color-secondary-content: #ffffff;
+    --color-accent: #f4dc4a;
+    --color-accent-content: #1c2433;
+    --color-neutral: #1c2433;
+    --color-neutral-content: #ffffff;
+    --color-info: #2e6f9e;
+    --color-info-content: #ffffff;
+    --color-success: #1f7a4d;
+    --color-success-content: #ffffff;
+    --color-warning: #b7791f;
+    --color-warning-content: #ffffff;
+    --color-error: #b42318;
+    --color-error-content: #ffffff;
+
+    --radius-selector: 0.25rem;
+    --radius-field: 0.375rem;
+    --radius-box: 0.5rem;
+    --size-selector: 0.25rem;
+    --size-field: 0.25rem;
+    --border: 1px;
+    --depth: 0;
+    --noise: 0;
 }
 
 /* maryUI */
 @source "../../vendor/robsontenorio/mary/src/View/Components/**/*.php";
 
-/* Theme toggle */
-/* @custom-variant light (&:where(.dark, .dark *)); */
-
 @variant dark (false);
+
+.tabular {
+    font-variant-numeric: tabular-nums;
+}
 
 /**
 * Paginator - Traditional style
 * Because Laravel defaults does not match well the design of daisyUI.
 */
-
 .mary-table-pagination span[aria-current="page"] > span {
     @apply bg-primary text-base-100
 }
@@ -44,14 +77,33 @@
     @apply cursor-pointer
 }
 
-.description h2 {
-    @apply font-bold mb-4;
+/* Imported job descriptions (HTML from the job sites) */
+.description {
+    @apply max-w-[68ch] leading-relaxed;
+}
+
+.description h2,
+.description h3 {
+    @apply text-lg font-semibold mt-8 mb-3 first:mt-0;
 }
 
 .description p {
     @apply mb-4;
 }
 
+.description ul,
+.description ol {
+    @apply ml-6 mb-4 space-y-1;
+}
+
 .description ul {
-    @apply list-disc ml-8 mb-4;
+    @apply list-disc;
+}
+
+.description ol {
+    @apply list-decimal;
+}
+
+.description a {
+    @apply text-primary underline underline-offset-2;
 }

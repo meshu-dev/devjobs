@@ -6,12 +6,12 @@ use App\Models\Job;
 
 class FavouriteJobAction
 {
-    public function execute(string $jobId): void
+    public function execute(int $userId, string $jobId): void
     {
-        $job = Job::find($jobId);
+        $job = Job::where('user_id', $userId)->find($jobId);
 
         if ($job) {
-            $job->favourited = $job->favourited ? false : true;
+            $job->favourited = ! $job->favourited;
             $job->save();
         }
     }

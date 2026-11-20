@@ -17,4 +17,42 @@ describe('JobsTable tests', function () {
             ->test('jobs-table', ['type' => 'jobs'])
             ->assertSee($softwareEngineerJob->title);
     });
+
+    it('favourites a job from the list', function () {
+        $user = User::find(UserEnum::MAIN->value);
+
+        $job = Job::find(JobEnum::SOFTWARE_ENGINEER->value);
+        $job->update(['favourited' => false]);
+
+        Livewire::actingAs($user)
+            ->test('jobs-table', ['type' => 'jobs'])
+            ->assertSee('Add '.$job->title.' to favourites')
+            ->call('toggleFavourite', $job->id)
+            ->assertSee('Remove '.$job->title.' from favourites');
+
+        expect($job->fresh()->favourited)->toBeTruthy();
+    });
+
+    it('shows a message when there are no favourites', function () {
+        $user = User::find(UserEnum::MAIN->value);
+
+        Job::where('user_id', $user->id)->update(['favourited' => false]);
+
+        Livewire::actingAs($user)
+            ->test('jobs-table', ['type' => 'favourite'])
+            ->assertSee('No favourites yet');
+    });
+
+    it("cannot favourite another user's job", function () {
+        $demoUser = User::find(UserEnum::DEMO->value);
+
+        $job = Job::find(JobEnum::SOFTWARE_ENGINEER->value);
+        $job->update(['favourited' => false]);
+
+        Livewire::actingAs($demoUser)
+            ->test('jobs-table', ['type' => 'jobs'])
+            ->call('toggleFavourite', $job->id);
+
+        expect($job->fresh()->favourited)->toBeFalsy();
+    });
 });

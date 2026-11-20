@@ -1,27 +1,23 @@
 <?php
 
 use App\Actions\JobSite\Larajobs\Feed\GetJobsAction;
-use willvincent\Feeds\Facades\FeedsFacade;
+use Mockery\MockInterface;
+use SimplePie\SimplePie;
 
 describe('Larajobs - GetJobsAction tests', function () {
     it('calls Larajobs API and returns job details', function () {
         // Arrange
         $feedData = fixtureAsJson('larajobs/feed', true);
-        $feed = new class($feedData)
-        {
-            public function __construct(private $items = null) {}
+        $items = array_map(fn ($item) => (object) $item, $feedData);
 
-            public function get_items()
-            {
-                return array_map(fn ($item) => (object) $item, $this->items);
-            }
-        };
+        $feedMock = mock(SimplePie::class, function (MockInterface $mock) use ($items) {
+            $mock->shouldReceive('set_feed_url')->once()->with(config('services.larajobs.url'));
+            $mock->shouldReceive('set_cache')->once();
+            $mock->shouldReceive('init')->once()->andReturn(true);
+            $mock->shouldReceive('get_items')->once()->andReturn($items);
+        });
 
-        $feedData = fixtureAsJson('larajobs/feed', true);
-
-        FeedsFacade::shouldReceive('make')
-            ->once()
-            ->andReturn($feed);
+        $this->app->bind(SimplePie::class, fn () => $feedMock);
 
         // Act
         $result = resolve(GetJobsAction::class)->execute();

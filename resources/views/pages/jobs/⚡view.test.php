@@ -25,11 +25,27 @@ describe('Jobs - view page tests', function () {
 
         Livewire::actingAs($user)
             ->test('pages::jobs.view', ['id' => $this->job->id])
-            ->assertSee('Favourite')
-            ->assertDontSee('Unfavourite')
+            ->assertSee('Add to favourites')
+            ->assertDontSee('Remove from favourites')
             ->call('toggleFavourite')
-            ->assertSee('Unfavourite');
+            ->assertSee('Remove from favourites');
 
         $this->assertAuthenticated();
+    });
+
+    it('returns not found for a job that does not exist', function () {
+        $user = User::find(UserEnum::MAIN->value);
+
+        Livewire::actingAs($user)
+            ->test('pages::jobs.view', ['id' => 'missing-job-id'])
+            ->assertNotFound();
+    });
+
+    it("returns not found for another user's job", function () {
+        $demoUser = User::find(UserEnum::DEMO->value);
+
+        Livewire::actingAs($demoUser)
+            ->test('pages::jobs.view', ['id' => $this->job->id])
+            ->assertNotFound();
     });
 });

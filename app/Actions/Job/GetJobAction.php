@@ -7,9 +7,9 @@ use App\Models\Job;
 
 class GetJobAction
 {
-    public function execute(string $id): ?Job
+    public function execute(int $userId, string $id): ?Job
     {
-        $job = Job::find($id);
+        $job = Job::where('user_id', $userId)->find($id);
 
         if ($job?->description && $job->jobSite?->id === JobSiteEnum::LARAJOBS->value) {
             $job->description = config('jobs.descriptions.'.JobSiteEnum::LARAJOBS->value);

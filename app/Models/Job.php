@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Actions\Job\GetJobSalaryAction;
+use Database\Factories\JobFactory;
 use Illuminate\Database\Eloquent\Casts\AsHtmlString;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
@@ -12,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Job extends Model
 {
-    /** @use HasFactory<\Database\Factories\JobFactory> */
+    /** @use HasFactory<JobFactory> */
     use HasFactory;
 
     use HasUlids;
