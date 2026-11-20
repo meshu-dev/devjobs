@@ -3,6 +3,7 @@
 use Livewire\Attributes\Validate;
 use Livewire\Attributes\Layout;
 use App\View\Components\BaseComponent;
+use App\View\Enums\ToastEnum;
 
 new #[Layout('layouts::auth')] class extends BaseComponent
 {
@@ -38,7 +39,10 @@ new #[Layout('layouts::auth')] class extends BaseComponent
     {
         if (Auth::attempt($params)) {
             $this->notify(ToastEnum::SUCCESS, 'You have successfully logged in', '/');
+
+            return;
         }
+
         $this->notify(ToastEnum::ERROR, 'Login was unsuccessful');
     }
 };
