@@ -55,7 +55,7 @@ new class extends BaseComponent
 
     public function toggleFavourite(string $jobId): void
     {
-        resolve(FavouriteJobAction::class)->execute($jobId);
+        resolve(FavouriteJobAction::class)->execute(Auth::id(), $jobId);
 
         unset($this->jobs, $this->days);
     }

@@ -42,4 +42,17 @@ describe('JobsTable tests', function () {
             ->test('jobs-table', ['type' => 'favourite'])
             ->assertSee('No favourites yet');
     });
+
+    it("cannot favourite another user's job", function () {
+        $demoUser = User::find(UserEnum::DEMO->value);
+
+        $job = Job::find(JobEnum::SOFTWARE_ENGINEER->value);
+        $job->update(['favourited' => false]);
+
+        Livewire::actingAs($demoUser)
+            ->test('jobs-table', ['type' => 'jobs'])
+            ->call('toggleFavourite', $job->id);
+
+        expect($job->fresh()->favourited)->toBeFalsy();
+    });
 });

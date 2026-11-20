@@ -40,4 +40,12 @@ describe('Jobs - view page tests', function () {
             ->test('pages::jobs.view', ['id' => 'missing-job-id'])
             ->assertNotFound();
     });
+
+    it("returns not found for another user's job", function () {
+        $demoUser = User::find(UserEnum::DEMO->value);
+
+        Livewire::actingAs($demoUser)
+            ->test('pages::jobs.view', ['id' => $this->job->id])
+            ->assertNotFound();
+    });
 });

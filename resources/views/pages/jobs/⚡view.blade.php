@@ -15,7 +15,7 @@ new class extends BaseComponent
 
     public function toggleFavourite(): void
     {
-        resolve(FavouriteJobAction::class)->execute($this->job->id);
+        resolve(FavouriteJobAction::class)->execute(Auth::id(), $this->job->id);
         $this->job->favourited = ! $this->job->favourited;
     }
 
@@ -33,7 +33,7 @@ new class extends BaseComponent
 
     public function mount(string $id): void
     {
-        $this->job = resolve(GetJobAction::class)->execute($id) ?? abort(404);
+        $this->job = resolve(GetJobAction::class)->execute(Auth::id(), $id) ?? abort(404);
     }
 };
 ?>
