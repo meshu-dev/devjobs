@@ -28,9 +28,9 @@
     </x-nav>
 
     {{-- MAIN --}}
-    <x-main>
+    <x-main full-width>
         {{-- SIDEBAR --}}
-        <x-slot:sidebar drawer="main-drawer" collapsible class="bg-base-100 lg:bg-base-200 lg:border-r lg:border-base-300">
+        <x-slot:sidebar drawer="main-drawer" collapsible class="bg-base-100 lg:border-r lg:border-base-300">
 
             {{-- BRAND --}}
             <a href="/" wire:navigate class="hidden-when-collapsed block px-5 pt-6 pb-4 text-2xl font-bold tracking-tight">
@@ -38,8 +38,8 @@
             </a>
 
             {{-- MENU --}}
-            <x-menu activate-by-route active-bg-color="bg-base-100 font-semibold">
-                <x-menu-item title="Jobs" icon="o-briefcase" link="/" />
+            <x-menu activate-by-route active-bg-color="bg-base-200 font-semibold">
+                <x-menu-item title="Jobs" icon="o-briefcase" link="/" :active="request()->is('view/*')" />
                 <x-menu-item title="Favourites" icon="o-star" link="/favourites" />
                 <x-menu-item title="Import history" icon="o-clock" link="/logs" />
                 <x-menu-item title="Profile" icon="o-user-circle" link="/profile" />
