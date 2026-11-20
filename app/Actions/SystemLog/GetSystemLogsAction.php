@@ -14,6 +14,8 @@ class GetSystemLogsAction
     {
         $pageLimit = config('jobs.pagination.page_limit');
 
-        return SystemLog::where('user_id', $userId)->paginate($pageLimit);
+        return SystemLog::where('user_id', $userId)
+            ->latest()
+            ->paginate($pageLimit);
     }
 }

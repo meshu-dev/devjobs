@@ -2,53 +2,55 @@
 
 use App\Actions\SystemLog\GetSystemLogsAction;
 use App\View\Components\BaseComponent;
-use Carbon\Carbon;
+use App\View\JobDates;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Livewire\Attributes\Validate;
-use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
+use Livewire\WithPagination;
 
 new class extends BaseComponent
 {
-    #[Locked]
-    public array $headers;
+    use WithPagination;
 
     #[Computed]
     public function logs(): LengthAwarePaginator
     {
-        $user = Auth::user();
-
-        return resolve(GetSystemLogsAction::class)->execute($user->id);
-    }
-
-    public function mount()
-    {
-        $user = Auth::user();
-
-        $this->headers = [
-            ['key' => 'text',       'label' => 'Message'],
-            ['key' => 'new_jobs',   'label' => 'New Jobs'],
-            ['key' => 'created_at', 'label' => 'Date'],
-        ];
+        return resolve(GetSystemLogsAction::class)->execute(Auth::id());
     }
 };
 ?>
 
 <div>
-    <livewire:header title="Logs" />
+    <livewire:header title="Import history" :subtitle="'Jobs are imported every day at '.config('jobs.import_time').'.'" />
+
     @if ($this->logs()->total() > 0)
-        <x-table
-            :headers="$headers"
-            :rows="$this->logs()"
-            with-pagination>
-            @scope('cell_new_jobs', $log)
-                {{ $log['context']['totalNewJobs'] }}
-            @endscope 
-            @scope('cell_created_at', $log)
-                {{ $log->created_at }}
-                /* Carbon::parse($log->created_at)->format('d/m/Y') */
-            @endscope 
-        </x-table>
+        <ul class="divide-y divide-base-300 rounded-box border border-base-300 bg-base-100">
+            @foreach ($this->logs() as $log)
+                @php($newJobs = (int) ($log->context['totalNewJobs'] ?? 0))
+                <li wire:key="log-{{ $log->id }}" class="flex items-center gap-4 px-4 py-3.5">
+                    <div class="min-w-0 flex-1">
+                        <p class="font-medium">
+                            @if ($log->created_at)
+                                {{ JobDates::day($log->created_at) }}<span class="text-muted font-normal">, {{ $log->created_at->format('H:i') }}</span>
+                            @else
+                                Date not recorded
+                            @endif
+                        </p>
+                        <p class="mt-0.5 text-sm text-muted truncate">{{ $log->text }}</p>
+                    </div>
+                    <span @class(['tabular text-sm whitespace-nowrap', 'font-semibold' => $newJobs > 0, 'text-muted' => $newJobs === 0])>
+                        {{ $newJobs === 0 ? 'No new jobs' : trans_choice('{1} 1 new job|[2,*] :count new jobs', $newJobs) }}
+                    </span>
+                </li>
+            @endforeach
+        </ul>
+
+        @if ($this->logs()->hasPages())
+            <div class="mt-6">{{ $this->logs()->links() }}</div>
+        @endif
     @else
-        <div>No logs added</div>
+        <div class="rounded-box border border-dashed border-base-300 px-6 py-10 text-center">
+            <p class="font-semibold">No imports yet</p>
+            <p class="mt-1 text-muted">The first import runs {{ JobDates::nextImport() }}.</p>
+        </div>
     @endif
 </div>

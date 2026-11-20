@@ -38,33 +38,34 @@ new #[Layout('layouts::auth')] class extends BaseComponent
     private function login(array $params)
     {
         if (Auth::attempt($params)) {
-            $this->notify(ToastEnum::SUCCESS, 'You have successfully logged in', '/');
+            $this->notify(ToastEnum::SUCCESS, 'Logged in', '/');
 
             return;
         }
 
-        $this->notify(ToastEnum::ERROR, 'Login was unsuccessful');
+        $this->notify(ToastEnum::ERROR, 'Email or password is incorrect');
     }
 };
 ?>
 
-<div class="max-w-md mx-auto">
-    <div class="text-4xl font-semibold text-center mb-4">DevJobs</div>
-    <x-form wire:submit="userLogin">
-        <x-input label="E-mail" wire:model="email" />
-        <x-password label="Password" wire:model="password" />
+<div class="w-full max-w-sm">
+    <h1 class="text-3xl font-bold tracking-tight">DevJobs</h1>
+    <p class="mt-2 mb-8 text-muted">Developer jobs from Reed, Larajobs and Jobleads, collected every day.</p>
+
+    <x-form wire:submit="userLogin" no-separator class="rounded-box border border-base-300 bg-base-100 p-6">
+        <x-input label="Email" type="email" autocomplete="email" wire:model="email" />
+        <x-password label="Password" autocomplete="current-password" wire:model="password" right />
         <x-slot:actions>
-            <div class="w-full flex justify-between">
-                <x-button
-                    label="Use Demo account"
-                    class="btn-ghost"
-                    wire:click="demoLogin()" />
-                <x-button
-                    label="Login"
-                    class="btn-primary"
-                    type="submit"
-                    spinner="save" />
-            </div>
+            <x-button
+                label="Log in"
+                class="btn-primary w-full"
+                type="submit"
+                spinner="userLogin" />
         </x-slot:actions>
     </x-form>
+
+    <p class="mt-6 text-center text-sm text-muted">
+        Just looking?
+        <button type="button" wire:click="demoLogin()" class="cursor-pointer font-medium text-primary underline underline-offset-2">Use the demo account</button>
+    </p>
 </div>

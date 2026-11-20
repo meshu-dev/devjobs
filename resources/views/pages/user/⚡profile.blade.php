@@ -48,7 +48,7 @@ new class extends BaseComponent
 
         resolve(EditProfileAction::class)->execute($params);
 
-        $this->notify(ToastEnum::SUCCESS, 'Profile has been updated');
+        $this->notify(ToastEnum::SUCCESS, 'Changes saved');
     }
 
     public function mount()
@@ -63,13 +63,13 @@ new class extends BaseComponent
 ?>
 
 <div>
-    <livewire:header title="Profile" />
-    <x-form wire:submit="save" class="max-w-md">
+    <livewire:header title="Profile" subtitle="Imports look for jobs paying at least your minimum salary. Your range shows as the yellow band on each job." />
+    <x-form wire:submit="save" no-separator class="max-w-md rounded-box border border-base-300 bg-base-100 p-6">
         <x-input label="Name" wire:model="name" />
-        <x-input label="Minimum Salary" wire:model="minSalary" prefix="GBP" money />
-        <x-input label="Maximum Salary" wire:model="maxSalary" prefix="GBP" money />
+        <x-input label="Minimum salary" wire:model="minSalary" prefix="GBP" money />
+        <x-input label="Maximum salary" wire:model="maxSalary" prefix="GBP" money />
         <x-slot:actions>
-            <x-button label="Save" class="btn-primary" type="submit" spinner="save" />
+            <x-button label="Save changes" class="btn-primary" type="submit" spinner="save" />
         </x-slot:actions>
     </x-form>
 </div>
